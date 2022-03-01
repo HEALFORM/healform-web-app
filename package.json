@@ -26,6 +26,7 @@
     "ts:check": "tsc --noEmit"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^1.7.0",
     "@emotion/css": "^11.7.1",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
