@@ -1,0 +1,145 @@
+#cc--main {
+  --cc-bg: var(--colors-white);
+  --cc-text: var(--colors-black);
+  --cc-btn-primary-bg: var(--colors-primary);
+  --cc-btn-primary-hover-bg: var(--colors-primary-dark);
+  --cc-btn-secondary-bg: var(--colors-gray-100);
+  --cc-btn-secondary-hover-bg: var(--colors-gray-200);
+  --cc-toggle-bg-on: var(--colors-primary);
+}
+
+@font-face {
+  font-family: 'Graphik';
+  font-display: block;
+  src: url("./../assets/fonts/Graphik-Regular.woff2") format("woff2"),
+  url("./../assets/fonts/Graphik-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Graphik';
+  font-display: block;
+  src: url("./../assets/fonts/Graphik-Bold.woff2") format("woff2"),
+  url("./../assets/fonts/Graphik-Bold.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Graphik';
+  font-display: block;
+  src: url("./../assets/fonts/Graphik-RegularItalic.woff2") format("woff2"),
+  url("./../assets/fonts/Graphik-RegularItalic.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Graphik';
+  font-display: block;
+  src: url("./../assets/fonts/Graphik-Semibold.woff2") format("woff2"),
+  url("./../assets/fonts/Graphik-Semibold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Graphik';
+  font-display: block;
+  src: url("./../assets/fonts/Graphik-SemiboldItalic.woff2") format("woff2"),
+  url("./../assets/fonts/Graphik-SemiboldItalic.woff") format("woff");
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Graphik';
+  font-display: block;
+  src: url("./../assets/fonts/Graphik-BoldItalic.woff2") format("woff2"),
+  url("./../assets/fonts/Graphik-BoldItalic.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 4px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #5c6bdd;
+  border: 0px none #ffffff;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #5c6bdd;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #5c6bdd;
+}
+::-webkit-scrollbar-track {
+  background: #ffffff;
+  border: 0px none #ffffff;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #ffffff;
+}
+::-webkit-scrollbar-track:active {
+  background: #ffffff;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+*,
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+body {
+  font-family: "Graphik", var(--fonts-font-stack-default)!important;
+}
+
+.cc_div .c-bn {
+  border-radius: var(--radius-xxl);
+  font-family: var(--fonts-font-stack-special);
+}
+
+div#c-ttl {
+  font-family: var(--fonts-font-stack-special);
+}
+
+.mapboxgl-ctrl-bottom-left, .mapboxgl-ctrl-bottom-right {
+  display: none;
+}
+
+.mapboxgl-ctrl-group {
+  border-radius: 5px!important;
+  background: rgba(255, 255, 255, 0.85)!important;
+  backdrop-filter: blur(20px)!important;
+}
+
+.mapboxgl-ctrl-group:not(:empty) {
+  box-shadow: none!important;
+}
+
+.marquee {
+  overflow: hidden;
+}

@@ -1,50 +1,116 @@
 {
   "name": "healform-web-app",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "private": false,
+  "bugs": {
+    "url": "https://github.com/HEALFORM/healform-web-app/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HEALFORM/healform-web-app"
+  },
+  "author": "Domenik Toefflinger <domenik@healform.de>",
+  "scripts": {
+    "build": "next build",
+    "build:analyze": "cross-env ANALYZE=true next build",
+    "cy:open": "yarn --cwd cypress cy:open",
+    "cy:run": "yarn --cwd cypress cy:run",
+    "cy:run:cy": "yarn --cwd cypress cy:run:ci",
+    "dev": "next",
+    "lint": "eslint --no-error-on-unmatched-pattern --cache --fix --report-unused-disable-directives {src,pages}/**/*.{js,ts,jsx,tsx}",
+    "prepare": "husky install",
+    "start": "next start",
+    "test": "jest --runInBand --coverage=false",
+    "test:ci": "yarn test --ci",
+    "test:watch": "yarn test --watch",
+    "ts:check": "tsc --noEmit"
+  },
   "dependencies": {
-    "@auth0/auth0-react": "^1.8.0",
+    "@emotion/css": "^11.7.1",
     "@emotion/react": "^11.7.1",
-    "@healform/design-tokens": "^0.0.11",
-    "@healform/ui-library": "^0.0.3",
+    "@emotion/styled": "^11.6.0",
+    "@healform/design-tokens": "^1.5.1",
+    "@healform/liquid": "^1.11.4",
+    "@hookform/resolvers": "^2.8.8",
+    "@next/bundle-analyzer": "^12.0.8",
+    "@phoenix344/opening-hours": "^1.1.1",
+    "@styled-system/css": "^5.1.5",
+    "@styled-system/should-forward-prop": "^5.1.5",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.0.3",
-    "@types/node": "^16.11.15",
-    "@types/react": "^17.0.37",
-    "@types/react-dom": "^17.0.11",
-    "axios": "^0.24.0",
+    "babel-jest": "^27.4.6",
+    "basicscroll": "^3.0.4",
+    "dotenv-load": "^2.0.0",
     "emotion-flex-grid": "^2.3.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-router-dom": "^5.3.0",
-    "react-scripts": "5.0.0",
-    "typescript": "^4.5.4",
-    "web-vitals": "^2.1.2"
+    "framer-motion": "^6.0.0",
+    "hamburger-react": "^2.4.1",
+    "jest": "^27.4.7",
+    "mapbox-gl": "^2.6.1",
+    "next": "12.0.8",
+    "next-compose-plugins": "^2.2.1",
+    "next-fonts": "^1.5.1",
+    "next-images": "^1.8.4",
+    "nprogress": "^0.2.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-fast-marquee": "^1.3.1",
+    "react-hook-form": "^7.24.2",
+    "react-icons": "^4.3.1",
+    "react-lottie": "^1.2.3",
+    "react-map-gl": "^6.1.18",
+    "react-multi-carousel": "^2.6.5",
+    "react-pay-icons": "^1.1.0",
+    "react-responsive": "^9.0.0-beta.6",
+    "react-scrollspy-navigation": "^1.0.2",
+    "react-sticky-box": "^0.9.3",
+    "react-text-transition": "^1.3.0",
+    "styled-system": "^5.1.5",
+    "ts-jest": "^27.1.3",
+    "zod": "^3.11.6"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "@emotion/babel-plugin": "^11.7.2",
+    "@emotion/jest": "^11.7.1",
+    "@next/eslint-plugin-next": "^12.0.8",
+    "@trivago/prettier-plugin-sort-imports": "^3.1.1",
+    "@types/jest": "^27.4.0",
+    "@types/node": "^17.0.10",
+    "@types/nprogress": "^0.2.0",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
+    "@types/styled-system": "^5.1.15",
+    "@types/styled-system__css": "^5.0.16",
+    "@types/styled-system__should-forward-prop": "^5.1.2",
+    "@types/webpack": "^5.28.0",
+    "@typescript-eslint/eslint-plugin": "^5.10.0",
+    "@typescript-eslint/parser": "^5.10.0",
+    "eslint": "^8.7.0",
+    "eslint-config-next": "^12.0.8",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.2.1",
+    "prettier": "^2.5.1",
+    "type-fest": "^2.10.0",
+    "typescript": "^4.5.4"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+  "lint-staged": {
+    "*.md": [
+      "npx prettier --parser markdown --write"
     ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+    "*.{css,scss,less}": [
+      "npx prettier --parser css --write"
+    ],
+    "*.json": [
+      "npx prettier --parser json --write"
+    ],
+    "*.{js,ts,jsx,tsx}": [
+      "eslint --fix",
+      "prettier --write",
+      "jest -c jest.config.js --bail --runInBand --findRelatedTests --coverage=false"
     ]
   }
 }
