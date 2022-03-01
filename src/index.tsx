@@ -1,20 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import {App} from './App';
-import * as serviceWorker from "./serviceWorker";
-import { Auth0Provider } from "@auth0/auth0-react";
-import history from "./utils/history";
-import { getConfig } from "./config";
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import { App } from './App'
+import { Auth0Provider } from '@auth0/auth0-react'
+import history from './utils/history'
+import { getConfig } from './config'
 
 // @ts-ignore
-const onRedirectCallback = (appState) => {
-  history.push(
-    appState && appState.returnTo ? appState.returnTo : window.location.pathname
-  );
-};
+const onRedirectCallback = appState => {
+  history.push(appState && appState.returnTo ? appState.returnTo : window.location.pathname)
+}
 
-const config = getConfig();
+const config = getConfig()
 
 const providerConfig = {
   domain: config.domain,
@@ -22,11 +19,11 @@ const providerConfig = {
   ...(config.audience ? { audience: config.audience } : null),
   redirectUri: window.location.origin,
   onRedirectCallback,
-};
+}
 
 ReactDOM.render(
   <Auth0Provider {...providerConfig}>
     <App />
   </Auth0Provider>,
-  document.getElementById("root")
-);
+  document.getElementById('root'),
+)

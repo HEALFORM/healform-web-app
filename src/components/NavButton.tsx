@@ -12,7 +12,7 @@ export const NavButton = (props: NavButtonProps) => {
   return (
     <Button variant="ghost" justifyContent="start" {...buttonProps} borderRadius={'md'}>
       <HStack spacing="3">
-        <Icon as={icon} boxSize="6" color="gray.400" />
+        <Icon as={icon} boxSize="5" color="currentColor" />
         <Text>{label}</Text>
       </HStack>
     </Button>

@@ -6,7 +6,7 @@ export const Card = (props: BoxProps) => (
     minH="3xs"
     bg={useColorModeValue('white', 'black')}
     boxShadow={useColorModeValue('sm', 'sm-dark')}
-    borderRadius="lg"
+    borderRadius="xl"
     {...props}
   />
 )
