@@ -81,15 +81,14 @@ export const Sidebar: React.FC = () => {
                 _activeLink={{ fontWeight: 'bold', bg: 'blue.50', color: 'blue.500' }}
               />
               <Menu>
-                <MenuButton as={NavButton} label={'Mehr'} icon={FiMoreHorizontal}>
-                  Actions
-                </MenuButton>
+                <NavButton as={MenuButton} label="Mehr" icon={FiMoreHorizontal} />
                 <MenuList>
-                  <MenuItem>Download</MenuItem>
-                  <MenuItem>Create a Copy</MenuItem>
-                  <MenuItem>Mark as Draft</MenuItem>
-                  <MenuItem>Delete</MenuItem>
-                  <MenuItem>Attend a Workshop</MenuItem>
+                  <MenuItem icon={<FiHelpCircle />}>
+                    Stornierungsbedingungen
+                  </MenuItem>
+                  <MenuItem icon={<FiHelpCircle />}>
+                    Rechtliche Hinweise
+                  </MenuItem>
                 </MenuList>
               </Menu>
             </Stack>

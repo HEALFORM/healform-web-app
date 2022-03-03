@@ -16,6 +16,7 @@ import {
   HStack,
 } from '@healform/liquid'
 import { StackDivider, InputGroup, InputLeftAddon, FormHelperText } from '@chakra-ui/react'
+import {PageHeader} from "../components/PageHeader";
 
 const ProfileView: React.FC = () => {
   const { user } = useAuth0()
@@ -24,19 +25,12 @@ const ProfileView: React.FC = () => {
       <Stack spacing="5">
         <Stack
           spacing="4"
-          direction={{ base: 'column', lg: 'row' }}
+          direction={{ base: 'column', md: 'row' }}
           justify="space-between"
           align={{ base: 'start', lg: 'center' }}
         >
           <Stack spacing="1">
-            <Box>
-              <Text fontSize="lg" fontWeight="medium">
-                Dein Profil
-              </Text>
-              <Text color="gray.500" fontSize="sm">
-                Tell others who you are
-              </Text>
-            </Box>
+            <PageHeader title={'Dein Profil'} subtitle={'Tell others who you are'} />
           </Stack>
           <HStack spacing="3">
             <Button variant={'solid'} colorScheme={'blue'}>

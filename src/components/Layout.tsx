@@ -24,6 +24,7 @@ export const Layout = () => {
           bg={useColorModeValue('#f5f5f5', 'gray.900')}
           borderTopLeftRadius={{ base: 'none', lg: '2rem' }}
           height="full"
+          overflowY="auto"
         >
           <Container p="6" flex="1" maxW="7xl">
             <Routes>
