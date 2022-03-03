@@ -11,12 +11,11 @@ import {
   Progress,
   Stack,
   Text,
-  Tooltip,
   useColorModeValue,
 } from '@healform/liquid'
+import { NavLink } from 'react-router-dom'
 import * as React from 'react'
 import {
-  FiBarChart2,
   FiBookmark,
   FiCheckSquare,
   FiHelpCircle,
@@ -32,7 +31,7 @@ import { UserProfile } from './UserProfile'
 import { useAuth0 } from '@auth0/auth0-react'
 
 export const Sidebar: React.FC = () => {
-  const { user, logout } = useAuth0()
+  const { logout } = useAuth0()
   return (
     <Flex as="section" minH="100vh" bg="white">
       <Flex
@@ -47,18 +46,40 @@ export const Sidebar: React.FC = () => {
           <Stack spacing={{ base: '4', sm: '5' }} shouldWrapChildren>
             <Logo />
             <Stack spacing="1">
-              <NavButton label="Home" icon={FiHome} />
-              <NavButton label="Dashboard" icon={FiBarChart2} bg={'blue.100'} color={'blue.500'} />
-              <NavButton label="Neuer Termin" icon={FiCheckSquare} />
+              <NavButton
+                as={NavLink}
+                to={'/'}
+                label="Dashboard"
+                icon={FiHome}
+                _activeLink={{ fontWeight: 'bold', bg: 'rgba(91, 104, 229, .1)', color: 'blue.500' }}
+              />
+              <NavButton
+                as={NavLink}
+                to={'/neuer-termin'}
+                label="Neuer Termin"
+                icon={FiCheckSquare}
+                _activeLink={{ fontWeight: 'bold', bg: 'rgba(91, 104, 229, .1)', color: 'blue.500' }}
+              />
               <NavButton label="Abonnements" icon={FiBookmark} />
-              <NavButton label="Profil" icon={FiUsers} />
+              <NavButton
+                as={NavLink}
+                to={'/profile'}
+                label="Profil"
+                icon={FiUsers}
+                _activeLink={{ fontWeight: 'bold', bg: 'rgba(91, 104, 229, .1)', color: 'blue.500' }}
+              />
             </Stack>
           </Stack>
           <Stack spacing={{ base: '5', sm: '6' }}>
             <Stack spacing="1">
               <NavButton label="Hilfe" icon={FiHelpCircle} />
               <NavButton label="Einstellungen" icon={FiSettings} />
-              <NavButton label="Logout" icon={FiLogOut} onClick={() => logout({ returnTo: window.location.origin })} />
+              <NavButton
+                label="Logout"
+                icon={FiLogOut}
+                onClick={() => logout({ returnTo: window.location.origin })}
+                _activeLink={{ fontWeight: 'bold', bg: 'blue.50', color: 'blue.500' }}
+              />
               <Menu>
                 <MenuButton as={NavButton} label={'Mehr'} icon={FiMoreHorizontal}>
                   Actions
