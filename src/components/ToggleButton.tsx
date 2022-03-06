@@ -50,6 +50,7 @@ export const ToggleButton = (props: ToggleButtonProps) => {
       color={isOpen ? 'white' : 'muted'}
       zIndex="skipLink"
       icon={<ToggleIcon active={isOpen} />}
+      h={'unset'}
       {...iconButtonProps}
     />
   )

@@ -4,9 +4,10 @@ import * as React from 'react'
 export const Card = (props: BoxProps) => (
   <Box
     minH="3xs"
-    bg={useColorModeValue('white', 'blackAlpha.600')}
-    boxShadow={useColorModeValue('sm', 'sm-dark')}
+    bg={useColorModeValue('white', 'gray.900')}
     borderRadius="xl"
+    borderColor={useColorModeValue('gray.200', 'whiteAlpha.200')}
+    borderWidth={'1px'}
     {...props}
   />
 )

@@ -92,27 +92,6 @@ export const Sidebar: React.FC = () => {
                 </MenuList>
               </Menu>
             </Stack>
-            <Box bg={useColorModeValue('gray.50', 'gray.900')} px="4" py="5" borderRadius="lg">
-              <Stack spacing="4">
-                <Stack spacing="1">
-                  <Text fontSize="sm" fontWeight="medium">
-                    Almost there
-                  </Text>
-                  <Text fontSize="sm" color="muted">
-                    Fill in some more information about you and your person.
-                  </Text>
-                </Stack>
-                <Progress value={80} size="sm" aria-label="Profile Update Progress" />
-                <HStack spacing="3">
-                  <Button variant="link" size="sm">
-                    Dismiss
-                  </Button>
-                  <Button variant="link" size="sm" colorScheme="blue">
-                    Update profile
-                  </Button>
-                </HStack>
-              </Stack>
-            </Box>
             <Divider />
             <UserProfile name="Christoph Winston" image="https://tinyurl.com/yhkm2ek8" email="chris@chakra-ui.com" />
           </Stack>

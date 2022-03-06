@@ -5,7 +5,6 @@ export const Logo = () => {
   return (
     <HStack>
       <Image src={require('./../assets/svg/healformLiquidDropBlack.png')} width={8} />
-      <Headline size={'two'}>HEALFORM</Headline>
     </HStack>
   )
 }
