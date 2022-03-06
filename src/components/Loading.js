@@ -1,6 +1,13 @@
 import React from 'react'
-import { Spinner, Stack } from '@healform/liquid'
+import { Spinner } from '@healform/liquid'
+import { Center } from '@chakra-ui/react'
 
-const Loading = () => <Spinner size="lg" />
+const Loading = () => {
+  return (
+    <Center>
+      <Spinner size="sm" />
+    </Center>
+  )
+}
 
 export default Loading

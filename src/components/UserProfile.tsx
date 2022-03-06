@@ -12,7 +12,7 @@ export const UserProfile = (props: UserProfileProps) => {
   const { user, isLoading } = useAuth0()
   return (
     <Skeleton isLoaded={!isLoading}>
-      <HStack spacing="3" pb={5}>
+      <HStack spacing="3" ps="2">
         <Avatar name={user?.name} src={user?.picture} boxSize="10" />
         <Box>
           <Text fontWeight="medium" fontSize="sm">
