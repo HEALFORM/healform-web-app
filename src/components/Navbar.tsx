@@ -11,6 +11,7 @@ import {
   HStack,
   IconButton,
   Menu,
+  MenuDivider,
   useBreakpointValue,
   useColorModeValue,
   useDisclosure,
@@ -18,13 +19,14 @@ import {
 import * as React from 'react'
 import {
   FiBookmark,
-  FiCheckSquare,
+  FiPlus,
   FiHelpCircle,
   FiHome,
   FiLogOut,
-  FiSearch,
+  FiMoreHorizontal,
   FiSettings,
   FiShoppingCart,
+  FiUser,
 } from 'react-icons/fi'
 import { Logo } from './Logo'
 import { Sidebar } from './Sidebar'
@@ -39,7 +41,14 @@ export const Navbar = () => {
   const { user, logout } = useAuth0()
 
   return (
-    <Box as="nav" bg={useColorModeValue('white', 'black')}>
+    <Box
+      as="nav"
+      bg={useColorModeValue('white', 'black')}
+      position={'fixed'}
+      w={'100%'}
+      zIndex={500}
+      boxShadow={{ base: 'xs', lg: 'sm' }}
+    >
       <Container py={{ base: '3' }} maxW={'none'}>
         <Flex justify="space-between">
           <HStack spacing="4">
@@ -62,7 +71,7 @@ export const Navbar = () => {
                   size={'lg'}
                   as={NavLink}
                   to={'/neuer-termin'}
-                  leftIcon={<FiCheckSquare />}
+                  leftIcon={<FiPlus />}
                   _activeLink={{ color: 'blue.500' }}
                   fontWeight={600}
                   color={'currentColor'}
@@ -113,11 +122,22 @@ export const Navbar = () => {
                     onClick={() => logout({ returnTo: window.location.origin })}
                   />
                 </Tooltip>
+                <Tooltip label={'Mehr'} hasArrow>
+                  <Menu>
+                    <MenuButton as={IconButton} aria-label="Options" icon={<FiMoreHorizontal />} />
+                    <MenuList>
+                      <MenuItem icon={<FiHelpCircle />}>Stornierungsbedingungen</MenuItem>
+                      <MenuItem icon={<FiHelpCircle />}>Rechtliche Hinweise</MenuItem>
+                    </MenuList>
+                  </Menu>
+                </Tooltip>
               </ButtonGroup>
               <Menu>
                 <Avatar name={user?.name} src={user?.picture} as={MenuButton} />
                 <MenuList>
-                  <MenuItem>Hi</MenuItem>
+                  <MenuItem isDisabled>{user?.name}</MenuItem>
+                  <MenuDivider />
+                  <MenuItem icon={<FiUser />}>Profil</MenuItem>
                 </MenuList>
               </Menu>
             </HStack>

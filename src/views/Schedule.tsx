@@ -1,14 +1,8 @@
 import React from 'react'
 import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react'
 import Loading from '../components/Loading'
-import {
-  Stack,
-  Box,
-  Divider,
-  Text,
-  HStack,
-} from '@healform/liquid'
-import {PageHeader} from "../components/PageHeader";
+import { Stack, Box, Divider, Text, HStack } from '@healform/liquid'
+import { PageHeader } from '../components/PageHeader'
 
 const ScheduleView: React.FC = () => {
   return (
@@ -21,7 +15,7 @@ const ScheduleView: React.FC = () => {
           align={{ base: 'start', lg: 'center' }}
         >
           <Stack spacing="1">
-            <PageHeader title={'Neuen Termin vereinbaren'} subtitle={'Tell others who you are'} />
+            <PageHeader title={'Neuer Termin'} subtitle={'Tell others who you are'} />
           </Stack>
           <HStack spacing="3">
             <Text>hi</Text>

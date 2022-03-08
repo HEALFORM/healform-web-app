@@ -7,7 +7,6 @@ import {
   Box,
   Divider,
   FormControl,
-  Text,
   FormLabel,
   Input,
   Avatar,
@@ -16,7 +15,7 @@ import {
   HStack,
 } from '@healform/liquid'
 import { StackDivider, InputGroup, InputLeftAddon, FormHelperText } from '@chakra-ui/react'
-import {PageHeader} from "../components/PageHeader";
+import { PageHeader } from '../components/PageHeader'
 
 const ProfileView: React.FC = () => {
   const { user } = useAuth0()
@@ -85,7 +84,6 @@ const ProfileView: React.FC = () => {
               <Textarea maxW={{ md: '3xl' }} rows={5} resize="none" />
             </Stack>
           </FormControl>
-
           <Flex direction="row-reverse">
             <Button variant="primary">Save</Button>
           </Flex>

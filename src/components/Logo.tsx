@@ -1,4 +1,4 @@
-import { HStack, Image, Headline } from '@healform/liquid'
+import { HStack, Image } from '@healform/liquid'
 import * as React from 'react'
 
 export const Logo = () => {

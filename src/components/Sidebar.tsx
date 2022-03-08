@@ -1,23 +1,9 @@
-import {
-  Box,
-  Button,
-  Divider,
-  Flex,
-  HStack,
-  Menu,
-  MenuList,
-  MenuButton,
-  MenuItem,
-  Progress,
-  Stack,
-  Text,
-  useColorModeValue,
-} from '@healform/liquid'
+import { Divider, Flex, Menu, MenuList, MenuButton, MenuItem, Stack, useColorModeValue } from '@healform/liquid'
 import { NavLink } from 'react-router-dom'
 import * as React from 'react'
 import {
   FiBookmark,
-  FiCheckSquare,
+  FiPlus,
   FiHelpCircle,
   FiHome,
   FiSettings,
@@ -57,7 +43,7 @@ export const Sidebar: React.FC = () => {
                 as={NavLink}
                 to={'/neuer-termin'}
                 label="Neuer Termin"
-                icon={FiCheckSquare}
+                icon={FiPlus}
                 _activeLink={{ fontWeight: 'bold', bg: 'rgba(91, 104, 229, .1)', color: 'blue.500' }}
               />
               <NavButton label="Abonnements" icon={FiBookmark} />
@@ -83,12 +69,8 @@ export const Sidebar: React.FC = () => {
               <Menu>
                 <NavButton as={MenuButton} label="Mehr" icon={FiMoreHorizontal} />
                 <MenuList>
-                  <MenuItem icon={<FiHelpCircle />}>
-                    Stornierungsbedingungen
-                  </MenuItem>
-                  <MenuItem icon={<FiHelpCircle />}>
-                    Rechtliche Hinweise
-                  </MenuItem>
+                  <MenuItem icon={<FiHelpCircle />}>Stornierungsbedingungen</MenuItem>
+                  <MenuItem icon={<FiHelpCircle />}>Rechtliche Hinweise</MenuItem>
                 </MenuList>
               </Menu>
             </Stack>
