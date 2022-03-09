@@ -1,38 +1,39 @@
 import React, { useEffect, useState } from 'react'
 import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react'
+import AppointmentList from '../components/AppointmentList'
+import AppointmentNext from '../components/AppointmentNext'
 import Loading from '../components/Loading'
+import Error from '../components/Error'
 import axios from 'axios'
 import { Appointment } from '../interfaces/Appointment'
 import {
   Stack,
   HStack,
   SimpleGrid,
-  Text,
   Box,
-  Body,
-  Skeleton,
   Button,
-  Heading,
-  Icon,
-  FeatureCard,
   Center,
   Tabs,
   TabList,
   Tab,
   TabPanels,
   TabPanel,
+  useToast,
+  Body,
+  BodyLarge,
 } from '@healform/liquid'
-import { FiPlus, FiMapPin, FiClock } from 'react-icons/fi'
-import { StackDivider } from '@chakra-ui/react'
+import { FiPlus } from 'react-icons/fi'
 import { PageHeader } from '../components/PageHeader'
-import ReactTimeAgo from 'react-time-ago'
-import { NavLink } from 'react-router-dom'
 
 const DashboardView: React.FC = () => {
   const { user } = useAuth0()
   const [appointments, setAppointments] = useState<Appointment[]>([])
+  const [futureAppointments, setFutureAppointments] = useState<Appointment[]>([])
+  const [pastAppointments, setPastAppointments] = useState<Appointment[]>([])
   const [nextAppointment, setNextAppointment] = useState<Appointment>()
   const [isLoading, setLoading] = useState(true)
+  const [isError, setError] = useState(false)
+  const toast = useToast()
 
   useEffect(() => {
     const getAppointmentByUser = (user: string | undefined) => {
@@ -42,15 +43,66 @@ const DashboardView: React.FC = () => {
           setAppointments(res.data)
           setLoading(false)
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          if (err.response) {
+            setLoading(false)
+            setError(true)
+            const id = 'errorResponse'
+            if (!toast.isActive(id)) {
+              toast({
+                title: 'Die Daten konnten nicht geladen werden.',
+                description: 'Der Server gab eine Fehlermeldung zurück.',
+                status: 'error',
+                isClosable: true,
+                position: 'bottom-right',
+                id,
+              })
+            }
+          } else if (err.request) {
+            setLoading(false)
+            setError(true)
+            const id = 'errorRequest'
+            if (!toast.isActive(id)) {
+              toast({
+                title: 'Die Daten konnten nicht geladen werden.',
+                description: 'Möglicherweise besteht keine Verbinung zum Internet oder Server.',
+                status: 'error',
+                isClosable: true,
+                position: 'bottom-right',
+                id,
+              })
+            }
+          } else {
+            console.log('anything else')
+          }
+        })
     }
 
     const getNextAppointmentByUser = (user: string | undefined) => {
       axios
         .get(`${process.env.REACT_APP_API_URL}` + `/acuity/` + user + `/appointments/next`)
         .then(res => {
-          console.log(res.data)
           setNextAppointment(res.data)
+          setLoading(false)
+        })
+        .catch(err => console.log(err))
+    }
+
+    const getFutureAppointmentByUser = (user: string | undefined) => {
+      axios
+        .get(`${process.env.REACT_APP_API_URL}` + `/acuity/` + user + `/appointments/future`)
+        .then(res => {
+          setFutureAppointments(res.data)
+          setLoading(false)
+        })
+        .catch(err => console.log(err))
+    }
+
+    const getPastAppointmentByUser = (user: string | undefined) => {
+      axios
+        .get(`${process.env.REACT_APP_API_URL}` + `/acuity/` + user + `/appointments/past`)
+        .then(res => {
+          setPastAppointments(res.data)
           setLoading(false)
         })
         .catch(err => console.log(err))
@@ -58,123 +110,63 @@ const DashboardView: React.FC = () => {
 
     getAppointmentByUser(user?.email)
     getNextAppointmentByUser(user?.email)
+    getFutureAppointmentByUser(user?.email)
+    getPastAppointmentByUser(user?.email)
   }, [])
-
-  const AppointmentList = () => {
-    if (!appointments || appointments.length === 0) return <>nichts da</>
-
-    return (
-      <Box bg={'white'} borderWidth={'1px'} borderRadius={'sm'}>
-        <Stack spacing="3" divider={<StackDivider />}>
-          {appointments.map(appointment => (
-            <Box key={appointment.id} px={3}>
-              {appointment.date}
-              <Body noMargin size={'two'} variant={'subtle'}>
-                {appointment.location}
-              </Body>
-            </Box>
-          ))}
-        </Stack>
-      </Box>
-    )
-  }
-
-  const NextAppointmentCard = () => {
-    if (!nextAppointment)
-      return (
-        <>
-          <FeatureCard variant={'neutral'}>
-            <Stack>
-              <Heading fontSize={32}>Du hast noch keinen Termin gebucht.</Heading>
-            </Stack>
-          </FeatureCard>
-        </>
-      )
-
-    return (
-      <>
-        <FeatureCard variant={'neutral'}>
-          <Stack spacing={3} fontFamily={'Space Grotesk'}>
-            <HStack>
-              <Text>Nächster Termin:</Text>
-            </HStack>
-            <Text fontSize={36}>
-              <ReactTimeAgo date={Date.parse(nextAppointment.datetime)} locale="de-DE" />
-            </Text>
-            <Stack spacing={1} color={'gray.500'}>
-              <HStack>
-                <Icon as={FiMapPin} />
-                <Body>{nextAppointment?.location}</Body>
-              </HStack>
-              <HStack>
-                <Icon as={FiClock} />
-                <Body>
-                  Am {nextAppointment?.date} um {nextAppointment?.time} Uhr
-                </Body>
-              </HStack>
-            </Stack>
-          </Stack>
-        </FeatureCard>
-      </>
-    )
-  }
 
   if (isLoading) {
     return <Loading />
   } else {
-    return (
-      <Stack spacing={{ base: '5', lg: '5' }}>
-        <Stack
-          spacing="4"
-          direction={{ base: 'column', md: 'row' }}
-          justify="space-between"
-          align={{ base: 'start', lg: 'center' }}
-        >
-          <Stack spacing="1">
-            <PageHeader title={'Start'} subtitle={` Hi, ${user?.name} 👋`} />
+    if (isError) {
+      return <Error />
+    } else {
+      return (
+        <>
+          <Stack spacing={5}>
+            <Stack spacing="2">
+              <Stack
+                spacing="4"
+                direction={{ base: 'column', md: 'row' }}
+                justify="space-between"
+                align={{ base: 'start', md: 'center' }}
+              >
+                <PageHeader title={'Start'} subtitle={`Guten Tag, ${user?.name} 👋`} />
+                <Button colorScheme={'gray'} leftIcon={<FiPlus fontSize="1.25rem" />}>
+                  Neuer Termin
+                </Button>
+              </Stack>
+              <Stack spacing={{ base: '5', lg: '6' }}>
+                <SimpleGrid columns={{ base: 1, md: 1 }} gap="6" mb={5}>
+                  <AppointmentNext nextAppointment={nextAppointment} />
+                </SimpleGrid>
+              </Stack>
+            </Stack>
+            <Stack spacing="2">
+              <Stack spacing="1">
+                <PageHeader title={'Ihre Termine'} subtitle={'Überblick deiner zukünftigen und vergangenen Termine.'} />
+              </Stack>
+              <Tabs variant={'soft-rounded'} colorScheme={'blue'}>
+                <TabList>
+                  <Tab>Zukünftige Termine</Tab>
+                  <Tab>Vergangene Termine</Tab>
+                </TabList>
+                <TabPanels>
+                  <TabPanel px={0}>
+                    <AppointmentList appointments={futureAppointments} />
+                  </TabPanel>
+                  <TabPanel px={0}>
+                    <AppointmentList appointments={pastAppointments} />
+                  </TabPanel>
+                </TabPanels>
+              </Tabs>
+              <Center>
+                <Button>Weitere Termine laden</Button>
+              </Center>
+            </Stack>
           </Stack>
-          <HStack spacing={{ base: 0, lg: 3 }}>
-            <Button colorScheme={'gray'} leftIcon={<FiPlus fontSize="1.25rem" />}>
-              Neuer Termin
-            </Button>
-          </HStack>
-        </Stack>
-        <Stack spacing={{ base: '5', lg: '6' }}>
-          <SimpleGrid columns={{ base: 1, md: 1 }} gap="6" mb={5}>
-            <Skeleton isLoaded={!isLoading} borderRadius={'xl'}>
-              <NextAppointmentCard />
-            </Skeleton>
-          </SimpleGrid>
-        </Stack>
-        <Stack spacing="1">
-          <Box>
-            <Text fontSize="lg" fontWeight="medium">
-              Ihre Termine
-            </Text>
-            <Text color="gray.500" fontSize="sm">
-              Tell others who you are
-            </Text>
-          </Box>
-        </Stack>
-        <Tabs variant={'soft-rounded'} colorScheme={'blue'}>
-          <TabList>
-            <Tab>Zukünftige Termine</Tab>
-            <Tab>Vergangene Termine</Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel px={0}>
-              <AppointmentList />
-            </TabPanel>
-            <TabPanel px={0}>
-              <AppointmentList />
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
-        <Center>
-          <Button>Weitere Termine laden</Button>
-        </Center>
-      </Stack>
-    )
+        </>
+      )
+    }
   }
 }
 

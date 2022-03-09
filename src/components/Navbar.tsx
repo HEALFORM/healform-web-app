@@ -41,14 +41,7 @@ export const Navbar = () => {
   const { user, logout } = useAuth0()
 
   return (
-    <Box
-      as="nav"
-      bg={useColorModeValue('white', 'black')}
-      position={'fixed'}
-      w={'100%'}
-      zIndex={500}
-      boxShadow={{ base: 'xs', lg: 'sm' }}
-    >
+    <Box as="nav" bg={useColorModeValue('white', 'black')} position={'fixed'} w={'100%'} zIndex={500}>
       <Container py={{ base: '3' }} maxW={'none'}>
         <Flex justify="space-between">
           <HStack spacing="4">
@@ -122,15 +115,13 @@ export const Navbar = () => {
                     onClick={() => logout({ returnTo: window.location.origin })}
                   />
                 </Tooltip>
-                <Tooltip label={'Mehr'} hasArrow>
-                  <Menu>
-                    <MenuButton as={IconButton} aria-label="Options" icon={<FiMoreHorizontal />} />
-                    <MenuList>
-                      <MenuItem icon={<FiHelpCircle />}>Stornierungsbedingungen</MenuItem>
-                      <MenuItem icon={<FiHelpCircle />}>Rechtliche Hinweise</MenuItem>
-                    </MenuList>
-                  </Menu>
-                </Tooltip>
+                <Menu>
+                  <MenuButton as={IconButton} aria-label="Options" icon={<FiMoreHorizontal />} />
+                  <MenuList>
+                    <MenuItem icon={<FiHelpCircle />}>Stornierungsbedingungen</MenuItem>
+                    <MenuItem icon={<FiHelpCircle />}>Rechtliche Hinweise</MenuItem>
+                  </MenuList>
+                </Menu>
               </ButtonGroup>
               <Menu>
                 <Avatar name={user?.name} src={user?.picture} as={MenuButton} />

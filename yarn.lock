@@ -1909,10 +1909,10 @@
   resolved "https://registry.yarnpkg.com/@healform/design-tokens/-/design-tokens-1.5.1.tgz#c4eeed10d2d72c4464da42c24824b0918c2e4d06"
   integrity sha512-NmmvGYfaQe8mVG8fJZlak8TpDwGmMi2PTFwbXEQ2ctMK3mLAhjmV7HgfV3pT41R1lZc+69o6qhMKYfhGVxYDcg==
 
-"@healform/liquid@^1.11.8":
-  version "1.11.8"
-  resolved "https://registry.yarnpkg.com/@healform/liquid/-/liquid-1.11.8.tgz#799a16985ee30d6f398fc248810cdac511f12096"
-  integrity sha512-DglBMyVSX5rWtExNz2UwRwZVghnWe5atWPmZsCk9MDE7LMz5I1wQUu117ZRHFNUTG3yPBb3JcbQaLXS/Pw6Erw==
+"@healform/liquid@^1.11.9":
+  version "1.11.9"
+  resolved "https://registry.yarnpkg.com/@healform/liquid/-/liquid-1.11.9.tgz#e14be6e61c5ca438cff86eb79ffd892c9e27fbb3"
+  integrity sha512-bz8VL2BMaE8wRAxoPylqa6/lIPAp9Gwx0817bvfKbVe9fQDEYd7b+PQQXGv4p1lWHQ+PAekOcpcwPtqOApKX7Q==
   dependencies:
     "@chakra-ui/icons" "^1.1.5"
     "@chakra-ui/react" "^1.8.3"

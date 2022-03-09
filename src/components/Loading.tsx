@@ -1,6 +1,5 @@
 import React from 'react'
-import { Spinner } from '@healform/liquid'
-import { Center } from '@chakra-ui/react'
+import { Spinner, Center } from '@healform/liquid'
 
 const Loading = () => {
   return (

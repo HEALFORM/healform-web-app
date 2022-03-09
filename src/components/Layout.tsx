@@ -23,7 +23,7 @@ export const Layout = () => {
   return (
     <Box as="section" height="100vh" overflowY="auto" bg={useColorModeValue('#f9f9f9', '#121212')}>
       <Navbar />
-      <Container maxW={'4xl'} pt={{ base: '24', lg: '32' }} pb={{ base: '12', lg: '24' }}>
+      <Container maxW={'3xl'} pt={{ base: '24', lg: '32' }} pb={{ base: '12', lg: '24' }}>
         {user?.email_verified && (
           <Alert status="warning" mb={10} colorScheme={'gray'}>
             <AlertIcon />

@@ -1,4 +1,4 @@
-import { Box, Text } from '@healform/liquid'
+import { Box, Body, BodyLarge } from '@healform/liquid'
 import * as React from 'react'
 
 interface PageHeaderProps {
@@ -10,12 +10,8 @@ export const PageHeader = (props: PageHeaderProps) => {
   const { title, subtitle } = props
   return (
     <Box>
-      <Text fontSize="xl" fontWeight="medium">
-        {title}
-      </Text>
-      <Text color="gray.500" fontSize="sm">
-        {subtitle}
-      </Text>
+      <BodyLarge noMargin>{title}</BodyLarge>
+      <Body variant={'subtle'}>{subtitle}</Body>
     </Box>
   )
 }
