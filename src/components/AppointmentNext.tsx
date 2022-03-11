@@ -1,4 +1,4 @@
-import { Body, FeatureCard, Heading, HStack, Icon, Stack, Text } from '@healform/liquid'
+import { Body, FeatureCard, Heading, HStack, Icon, Stack, Headline } from '@healform/liquid'
 import ReactTimeAgo from 'react-time-ago'
 import { FiClock, FiMapPin } from 'react-icons/fi'
 import React from 'react'
@@ -19,23 +19,23 @@ const AppointmentNext = (props: { nextAppointment: any }) => {
   return (
     <>
       <FeatureCard variant={'neutral'}>
-        <Stack spacing={3} fontFamily={'Space Grotesk'}>
+        <Stack spacing={2}>
           <HStack>
-            <Text>Nächster Termin:</Text>
+            <Body noMargin>Nächster Termin:</Body>
           </HStack>
-          <Text fontSize={36}>
+          <Headline color={'blue.500'}>
             <ReactTimeAgo date={Date.parse(nextAppointment.datetime)} locale="de-DE" />
-          </Text>
+          </Headline>
           <Stack spacing={1} color={'gray.500'}>
-            <HStack>
-              <Icon as={FiMapPin} />
-              <Body>{nextAppointment?.location}</Body>
-            </HStack>
             <HStack>
               <Icon as={FiClock} />
               <Body>
                 Am {nextAppointment?.date} um {nextAppointment?.time} Uhr
               </Body>
+            </HStack>
+            <HStack>
+              <Icon as={FiMapPin} />
+              <Body>{nextAppointment?.location}</Body>
             </HStack>
           </Stack>
         </Stack>

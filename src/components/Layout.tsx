@@ -9,6 +9,7 @@ import {
   AlertIcon,
   Button,
 } from '@healform/liquid'
+import AppointmentDetailView from '../views/AppointmentDetail'
 import DashboardView from '../views/Dashboard'
 import ProfileView from '../views/Profile'
 import ScheduleView from '../views/Schedule'
@@ -36,6 +37,7 @@ export const Layout = () => {
         )}
         <Routes>
           <Route path="/" element={<ProtectedRoute component={DashboardView} />} />
+          <Route path="/termin/:id" element={<ProtectedRoute component={AppointmentDetailView} />} />
           <Route path="/neuer-termin" element={<ProtectedRoute component={ScheduleView} />} />
           <Route path="/profile" element={<ProtectedRoute component={ProfileView} />} />
         </Routes>

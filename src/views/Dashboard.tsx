@@ -1,16 +1,14 @@
+// @ts-nocheck
 import React, { useEffect, useState } from 'react'
 import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react'
 import AppointmentList from '../components/AppointmentList'
 import AppointmentNext from '../components/AppointmentNext'
 import Loading from '../components/Loading'
 import Error from '../components/Error'
-import axios from 'axios'
 import { Appointment } from '../interfaces/Appointment'
 import {
   Stack,
-  HStack,
   SimpleGrid,
-  Box,
   Button,
   Center,
   Tabs,
@@ -19,15 +17,15 @@ import {
   TabPanels,
   TabPanel,
   useToast,
-  Body,
-  BodyLarge,
+  useColorModeValue,
 } from '@healform/liquid'
 import { FiPlus } from 'react-icons/fi'
 import { PageHeader } from '../components/PageHeader'
+import moment from 'moment'
+import _ from 'lodash'
 
 const DashboardView: React.FC = () => {
   const { user } = useAuth0()
-  const [appointments, setAppointments] = useState<Appointment[]>([])
   const [futureAppointments, setFutureAppointments] = useState<Appointment[]>([])
   const [pastAppointments, setPastAppointments] = useState<Appointment[]>([])
   const [nextAppointment, setNextAppointment] = useState<Appointment>()
@@ -37,10 +35,31 @@ const DashboardView: React.FC = () => {
 
   useEffect(() => {
     const getAppointmentByUser = (user: string | undefined) => {
-      axios
-        .get(`${process.env.REACT_APP_API_URL}` + `/acuity/` + user + `/appointments`)
-        .then(res => {
-          setAppointments(res.data)
+      fetch(`${process.env.REACT_APP_API_URL}` + `/acuity/` + user + `/appointments`)
+        .then(response => response.json())
+        .then(json => {
+          /* Set future appointments */
+          let futureAppointments = json.filter((x: { datetime: string }) => Date.parse(x.datetime) > new Date())
+          futureAppointments = _.sortBy(futureAppointments, function (o) {
+            return new moment(o.datetime)
+          })
+          setFutureAppointments(futureAppointments)
+
+          /* Set past appointments */
+          let pastAppointments = json.filter((x: { datetime: string }) => Date.parse(x.datetime) < new Date())
+          pastAppointments = _.sortBy(pastAppointments, function (o) {
+            return new moment(o.datetime)
+          })
+          setPastAppointments(pastAppointments)
+
+          /* Set next appointment */
+          let nextAppointment = json.filter((x: { datetime: string }) => Date.parse(x.datetime) > new Date())
+          nextAppointment = _.sortBy(nextAppointment, function (o) {
+            return new moment(o.datetime)
+          })
+          setNextAppointment(nextAppointment[0])
+
+          /* Disable loading */
           setLoading(false)
         })
         .catch(err => {
@@ -72,46 +91,11 @@ const DashboardView: React.FC = () => {
                 id,
               })
             }
-          } else {
-            console.log('anything else')
           }
         })
     }
 
-    const getNextAppointmentByUser = (user: string | undefined) => {
-      axios
-        .get(`${process.env.REACT_APP_API_URL}` + `/acuity/` + user + `/appointments/next`)
-        .then(res => {
-          setNextAppointment(res.data)
-          setLoading(false)
-        })
-        .catch(err => console.log(err))
-    }
-
-    const getFutureAppointmentByUser = (user: string | undefined) => {
-      axios
-        .get(`${process.env.REACT_APP_API_URL}` + `/acuity/` + user + `/appointments/future`)
-        .then(res => {
-          setFutureAppointments(res.data)
-          setLoading(false)
-        })
-        .catch(err => console.log(err))
-    }
-
-    const getPastAppointmentByUser = (user: string | undefined) => {
-      axios
-        .get(`${process.env.REACT_APP_API_URL}` + `/acuity/` + user + `/appointments/past`)
-        .then(res => {
-          setPastAppointments(res.data)
-          setLoading(false)
-        })
-        .catch(err => console.log(err))
-    }
-
     getAppointmentByUser(user?.email)
-    getNextAppointmentByUser(user?.email)
-    getFutureAppointmentByUser(user?.email)
-    getPastAppointmentByUser(user?.email)
   }, [])
 
   if (isLoading) {
@@ -131,9 +115,7 @@ const DashboardView: React.FC = () => {
                 align={{ base: 'start', md: 'center' }}
               >
                 <PageHeader title={'Start'} subtitle={`Guten Tag, ${user?.name} 👋`} />
-                <Button colorScheme={'gray'} leftIcon={<FiPlus fontSize="1.25rem" />}>
-                  Neuer Termin
-                </Button>
+                <Button leftIcon={<FiPlus fontSize="1.25rem" />}>Neuer Termin</Button>
               </Stack>
               <Stack spacing={{ base: '5', lg: '6' }}>
                 <SimpleGrid columns={{ base: 1, md: 1 }} gap="6" mb={5}>
@@ -143,12 +125,41 @@ const DashboardView: React.FC = () => {
             </Stack>
             <Stack spacing="2">
               <Stack spacing="1">
-                <PageHeader title={'Ihre Termine'} subtitle={'Überblick deiner zukünftigen und vergangenen Termine.'} />
+                <PageHeader
+                  title={'Deine Termine'}
+                  subtitle={'Überblick deiner zukünftigen und vergangenen Termine.'}
+                />
               </Stack>
-              <Tabs variant={'soft-rounded'} colorScheme={'blue'}>
+              <Tabs variant={'unstyled'} colorScheme={'blue'}>
                 <TabList>
-                  <Tab>Zukünftige Termine</Tab>
-                  <Tab>Vergangene Termine</Tab>
+                  <Tab
+                    color={useColorModeValue('gray.800', 'gray.600')}
+                    fontWeight="medium"
+                    borderRadius="xl"
+                    _selected={{
+                      color: 'blue.500',
+                      bg: useColorModeValue('blue.100', 'whiteAlpha.100'),
+                    }}
+                    _focus={{
+                      boxShadow: 'none',
+                    }}
+                  >
+                    Zukünftige Termine
+                  </Tab>
+                  <Tab
+                    color={useColorModeValue('gray.800', 'gray.600')}
+                    fontWeight="medium"
+                    borderRadius="xl"
+                    _selected={{
+                      color: 'blue.500',
+                      bg: useColorModeValue('blue.100', 'whiteAlpha.100'),
+                    }}
+                    _focus={{
+                      boxShadow: 'none',
+                    }}
+                  >
+                    Vergangene Termine
+                  </Tab>
                 </TabList>
                 <TabPanels>
                   <TabPanel px={0}>
