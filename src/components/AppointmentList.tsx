@@ -1,10 +1,11 @@
 import { Body, Box, Stack, useColorModeValue, Tooltip } from '@healform/liquid'
 import { StackDivider, IconButton } from '@chakra-ui/react'
 import React from 'react'
-import { FiEye, FiTrash } from 'react-icons/fi'
+import { FiCalendar, FiEye, FiTrash } from 'react-icons/fi'
 import { NavLink } from 'react-router-dom'
+import { Appointment } from '../interfaces/Appointment'
 
-const AppointmentList = (props: { appointments: any }) => {
+const AppointmentList = (props: { appointments: Appointment[] }) => {
   const { appointments } = props
   if (!appointments || appointments.length === 0)
     return (
@@ -22,9 +23,17 @@ const AppointmentList = (props: { appointments: any }) => {
   return (
     <Box bg={useColorModeValue('white', 'black')} borderWidth={'1px'} borderRadius={'sm'}>
       <Stack spacing="3" divider={<StackDivider />} py={3}>
-        {appointments.map((appointment: { id: string; date: string; time: string; location: string }) => (
+        {appointments.map(appointment => (
           <Stack key={appointment.id} justify="space-between" direction="row" spacing="4" px={3}>
-            <Stack spacing="0.5" fontSize="sm">
+            <Stack
+              spacing="0.5"
+              fontSize="sm"
+              as={NavLink}
+              to={'/termin/' + appointment.id}
+              _hover={{
+                cursor: 'pointer',
+              }}
+            >
               <Body noMargin size={'one'}>
                 {appointment.date} • {appointment.time}
               </Body>
@@ -38,9 +47,17 @@ const AppointmentList = (props: { appointments: any }) => {
                 <IconButton
                   icon={<FiEye fontSize="1.25rem" />}
                   variant="ghost"
-                  aria-label="Edit experience"
+                  aria-label="Details ansehen"
                   as={NavLink}
                   to={'/termin/' + appointment.id}
+                />
+              </Tooltip>
+              <Tooltip label={'Termin umbuchen'}>
+                <IconButton
+                  icon={<FiCalendar fontSize="1.25rem" />}
+                  variant="ghost"
+                  aria-label="Termin stornieren"
+                  disabled={!appointment.canClientReschedule}
                 />
               </Tooltip>
               <Tooltip label={'Termin stornieren'}>
@@ -48,7 +65,8 @@ const AppointmentList = (props: { appointments: any }) => {
                   icon={<FiTrash fontSize="1.25rem" />}
                   colorScheme={'red'}
                   variant="ghost"
-                  aria-label="Delete experience"
+                  aria-label="Termin stornieren"
+                  disabled={!appointment.canClientCancel}
                 />
               </Tooltip>
             </Stack>
