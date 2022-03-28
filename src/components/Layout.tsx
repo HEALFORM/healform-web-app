@@ -1,14 +1,5 @@
 import { Navbar } from './Navbar'
-import {
-  Box,
-  Container,
-  useColorModeValue,
-  Alert,
-  AlertTitle,
-  AlertDescription,
-  AlertIcon,
-  Button,
-} from '@healform/liquid'
+import { Box, useColorModeValue, Alert, AlertTitle, AlertDescription, AlertIcon, Button } from '@healform/liquid'
 import AppointmentDetailView from '../views/AppointmentDetail'
 import DashboardView from '../views/Dashboard'
 import ProfileView from '../views/Profile'
@@ -24,9 +15,9 @@ export const Layout = () => {
 
   return (
     <>
-      <Box as="section" bg={useColorModeValue('#f9f9f9', '#121212')}>
+      <Box as="section" bg={useColorModeValue('gray.100', 'gray.900')}>
         <Navbar />
-        <Container maxW={'3xl'} pt={{ base: '24', lg: '32' }} pb={{ base: '12', lg: '24' }}>
+        <Box mx="auto" maxW={'3xl'} pt={{ base: '24', lg: '32' }} pb={{ base: '12', lg: '24' }}>
           {user?.email_verified && (
             <Alert status="warning" mb={10} colorScheme={'gray'}>
               <AlertIcon />
@@ -43,7 +34,7 @@ export const Layout = () => {
             <Route path="/neuer-termin" element={<ProtectedRoute component={ScheduleView} />} />
             <Route path="/profile" element={<ProtectedRoute component={ProfileView} />} />
           </Routes>
-        </Container>
+        </Box>
       </Box>
       <ChatwootWidget />
     </>
