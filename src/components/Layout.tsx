@@ -15,7 +15,7 @@ export const Layout = () => {
 
   return (
     <>
-      <Box as="section" bg={useColorModeValue('gray.100', 'gray.900')}>
+      <Box as="section" bg={useColorModeValue('gray.50', 'gray.900')}>
         <Navbar />
         <Box mx="auto" maxW={'3xl'} pt={{ base: '24', lg: '32' }} pb={{ base: '12', lg: '24' }}>
           {user?.email_verified && (
