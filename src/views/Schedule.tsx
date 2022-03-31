@@ -1,7 +1,7 @@
 import React from 'react'
 import { withAuthenticationRequired } from '@auth0/auth0-react'
 import Loading from '../components/Loading'
-import { Stack, Divider, Text, HStack, Box, Container } from '@healform/liquid'
+import { Stack, Divider, Text, HStack } from '@healform/liquid'
 import { PageHeader } from '../components/PageHeader'
 import { RadioCard, RadioCardGroup } from '../components/RadioCardGroup'
 
@@ -50,7 +50,7 @@ const ScheduleView: React.FC = () => {
         <RadioCardGroup defaultValue="one" spacing="3">
           {locations.map(location => (
             <RadioCard key={location.id} value={location.acuityId}>
-              <Text color="blue.500" fontWeight="medium" fontSize="sm">
+              <Text color="primary.500" fontWeight="medium" fontSize="sm">
                 {location.name}
               </Text>
               <Text color="gray.600" fontSize="sm">

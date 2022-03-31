@@ -23,7 +23,7 @@ const AppointmentNext = (props: { nextAppointment: any }) => {
           <HStack>
             <Body noMargin>Nächster Termin:</Body>
           </HStack>
-          <Headline color={'blue.500'}>
+          <Headline color={'primary.500'} as={'h2'}>
             <ReactTimeAgo date={Date.parse(nextAppointment.datetime)} locale="de-DE" />
           </Headline>
           <Stack spacing={1} color={'gray.500'}>

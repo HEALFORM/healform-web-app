@@ -78,7 +78,7 @@ export const RadioCard = (props: RadioCardProps) => {
         <Stack direction="row">
           <Box flex="1">{children}</Box>
           {state.isChecked ? (
-            <Circle bg="blue.500" size="4">
+            <Circle bg="primary.500" size="4">
               <Icon as={CheckIcon} boxSize="2.5" color="white" />
             </Circle>
           ) : (

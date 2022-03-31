@@ -37,14 +37,14 @@ export const Sidebar: React.FC = () => {
                 to={'/'}
                 label="Dashboard"
                 icon={FiHome}
-                _activeLink={{ fontWeight: 'bold', bg: 'rgba(91, 104, 229, .1)', color: 'blue.500' }}
+                _activeLink={{ fontWeight: 'bold', bg: 'rgba(91, 104, 229, .1)', color: 'primary.500' }}
               />
               <NavButton
                 as={NavLink}
                 to={'/neuer-termin'}
                 label="Neuer Termin"
                 icon={FiPlus}
-                _activeLink={{ fontWeight: 'bold', bg: 'rgba(91, 104, 229, .1)', color: 'blue.500' }}
+                _activeLink={{ fontWeight: 'bold', bg: 'rgba(91, 104, 229, .1)', color: 'primary.500' }}
               />
               <NavButton label="Abonnements" icon={FiBookmark} />
               <NavButton
@@ -52,7 +52,7 @@ export const Sidebar: React.FC = () => {
                 to={'/profile'}
                 label="Profil"
                 icon={FiUsers}
-                _activeLink={{ fontWeight: 'bold', bg: 'rgba(91, 104, 229, .1)', color: 'blue.500' }}
+                _activeLink={{ fontWeight: 'bold', bg: 'rgba(91, 104, 229, .1)', color: 'primary.500' }}
               />
             </Stack>
           </Stack>
@@ -64,7 +64,7 @@ export const Sidebar: React.FC = () => {
                 label="Logout"
                 icon={FiLogOut}
                 onClick={() => logout({ returnTo: window.location.origin })}
-                _activeLink={{ fontWeight: 'bold', bg: 'blue.50', color: 'blue.500' }}
+                _activeLink={{ fontWeight: 'bold', bg: 'primary.50', color: 'primary.500' }}
               />
               <Menu>
                 <NavButton as={MenuButton} label="Mehr" icon={FiMoreHorizontal} />

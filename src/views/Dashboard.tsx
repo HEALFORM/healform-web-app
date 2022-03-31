@@ -137,8 +137,8 @@ const DashboardView: React.FC = () => {
                     fontWeight="medium"
                     borderRadius="xl"
                     _selected={{
-                      color: 'blue.500',
-                      bg: useColorModeValue('blue.100', 'whiteAlpha.100'),
+                      color: 'primary.500',
+                      bg: useColorModeValue('primary.100', 'whiteAlpha.100'),
                     }}
                     _focus={{
                       boxShadow: 'none',
@@ -151,8 +151,8 @@ const DashboardView: React.FC = () => {
                     fontWeight="medium"
                     borderRadius="xl"
                     _selected={{
-                      color: 'blue.500',
-                      bg: useColorModeValue('blue.100', 'whiteAlpha.100'),
+                      color: 'primary.500',
+                      bg: useColorModeValue('primary.100', 'whiteAlpha.100'),
                     }}
                     _focus={{
                       boxShadow: 'none',

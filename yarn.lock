@@ -1857,22 +1857,22 @@
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"
   integrity sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==
 
-"@healform/design-tokens@^1.5.1":
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/@healform/design-tokens/-/design-tokens-1.5.1.tgz#c4eeed10d2d72c4464da42c24824b0918c2e4d06"
-  integrity sha512-NmmvGYfaQe8mVG8fJZlak8TpDwGmMi2PTFwbXEQ2ctMK3mLAhjmV7HgfV3pT41R1lZc+69o6qhMKYfhGVxYDcg==
+"@healform/design-tokens@^1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@healform/design-tokens/-/design-tokens-1.7.0.tgz#238426f8659e36d413ec5dadc44080e49f07e0c9"
+  integrity sha512-Nom+A5388gnQ8IYUHS5UpQ9D+ToE9TraZuLPH1mPMgKQMoIQmZMGtFQDWpWTvFu2ykTXEN2B6LpljycWpXAlGg==
 
-"@healform/liquid@^1.13.0":
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/@healform/liquid/-/liquid-1.13.0.tgz#d540f41830b48d999ea612916e48d5e530b397ea"
-  integrity sha512-JIKzD4LyNSXjrczEpb/2RAin3p60X+7UbMe23UiRPR1pTugU1AEe13TkeOk4uaou0ctozVMhmszrHqk/k6CseA==
+"@healform/liquid@^1.14.0":
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/@healform/liquid/-/liquid-1.14.0.tgz#85980751d04d80165542e978c846e60dd2c2848c"
+  integrity sha512-zuBCUNywg16FGEepEti6McMNsAAwpKW1av/OO/+Nqj9mdru9ksuX0+1WE+tDekUwVAWAfehvfNGr/yq9YWWm8Q==
   dependencies:
     "@chakra-ui/icons" "^1.1.7"
     "@chakra-ui/react" "^1.8.7"
     "@chakra-ui/react-env" "^1.1.6"
     "@chakra-ui/theme-tools" "^1.3.6"
     "@commitlint/config-conventional" "^16.2.1"
-    "@healform/design-tokens" "^1.5.1"
+    "@healform/design-tokens" "^1.7.0"
     "@semantic-release/changelog" "^6.0.1"
     "@semantic-release/commit-analyzer" "^9.0.2"
     "@semantic-release/exec" "^6.0.3"
