@@ -96,7 +96,7 @@ const DashboardView: React.FC = () => {
     }
 
     getAppointmentByUser(user?.email)
-  }, [])
+  }, [toast, user?.email])
 
   if (isLoading) {
     return <Loading />

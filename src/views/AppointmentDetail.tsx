@@ -58,7 +58,7 @@ const AppointmentDetailView: React.FC = () => {
     }
 
     getAppointmentDetailsByUser(user?.email)
-  }, [])
+  }, [id, toast, user?.email])
 
   if (isLoading) {
     return <Loading />
@@ -82,7 +82,9 @@ const AppointmentDetailView: React.FC = () => {
               <Button leftIcon={<FiPlus fontSize="1.25rem" />}>Neuer Termin</Button>
             </Stack>
             <Stack spacing={{ base: '5', lg: '6' }}>
-              <SimpleGrid columns={{ base: 1, md: 1 }} gap="6" mb={5}></SimpleGrid>
+              <SimpleGrid columns={{ base: 1, md: 1 }} gap="6" mb={5}>
+                huhu
+              </SimpleGrid>
             </Stack>
           </Stack>
         </Stack>
