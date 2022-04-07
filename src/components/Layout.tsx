@@ -1,9 +1,11 @@
-import { Navbar } from './Navbar'
+import { Navbar } from './Navigation/Navbar'
 import { Box, useColorModeValue, Alert, AlertTitle, AlertDescription, AlertIcon, Button } from '@healform/liquid'
-import AppointmentDetailView from '../views/AppointmentDetail'
-import DashboardView from '../views/Dashboard'
-import ProfileView from '../views/Profile'
-import ScheduleView from '../views/Schedule'
+import AppointmentCreateView from '../views/AppointmentCreateView'
+import AppointmentDetailView from '../views/AppointmentDetailView'
+import CertificatesView from '../views/CertificatesView'
+import ShopView from '../views/ShopView'
+import DashboardView from '../views/DashboardView'
+import ProfileView from '../views/ProfileView'
 import * as React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { ProtectedRoute } from './ProtectedRoute'
@@ -31,7 +33,9 @@ export const Layout = () => {
           <Routes>
             <Route path="/" element={<ProtectedRoute component={DashboardView} />} />
             <Route path="/termin/:id" element={<ProtectedRoute component={AppointmentDetailView} />} />
-            <Route path="/neuer-termin" element={<ProtectedRoute component={ScheduleView} />} />
+            <Route path="/neuer-termin" element={<ProtectedRoute component={AppointmentCreateView} />} />
+            <Route path="/abonnements" element={<ProtectedRoute component={CertificatesView} />} />
+            <Route path="/shop" element={<ProtectedRoute component={ShopView} />} />
             <Route path="/profile" element={<ProtectedRoute component={ProfileView} />} />
           </Routes>
         </Box>

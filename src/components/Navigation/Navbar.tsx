@@ -28,7 +28,7 @@ import {
   FiShoppingCart,
   FiUser,
 } from 'react-icons/fi'
-import { Logo } from './Logo'
+import { Logo } from '../Logo'
 import { Sidebar } from './Sidebar'
 import { ToggleButton } from './ToggleButton'
 import { NavLink } from 'react-router-dom'
@@ -58,7 +58,7 @@ export const Navbar = () => {
                   color={'currentColor'}
                   transitionDuration={'0ms'}
                 >
-                  Start
+                  Dashboard
                 </Button>
                 <Button
                   size={'lg'}

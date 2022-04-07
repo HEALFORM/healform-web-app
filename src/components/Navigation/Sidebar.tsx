@@ -11,9 +11,9 @@ import {
   FiMoreHorizontal,
   FiLogOut,
 } from 'react-icons/fi'
-import { Logo } from './Logo'
+import { Logo } from '../Logo'
 import { NavButton } from './NavButton'
-import { UserProfile } from './UserProfile'
+import { UserProfile } from '../UserProfile'
 import { useAuth0 } from '@auth0/auth0-react'
 
 export const Sidebar: React.FC = () => {

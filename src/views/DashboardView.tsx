@@ -1,8 +1,8 @@
 // @ts-nocheck
 import React, { useEffect, useState } from 'react'
 import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react'
-import AppointmentList from '../components/AppointmentList'
-import AppointmentNext from '../components/AppointmentNext'
+import AppointmentList from '../components/Appointments/AppointmentList'
+import AppointmentNext from '../components/Appointments/AppointmentNext'
 import Loading from '../components/Loading'
 import Error from '../components/Error'
 import { Appointment } from '../interfaces/Appointment'
@@ -18,6 +18,7 @@ import {
   TabPanel,
   useToast,
   useColorModeValue,
+  Divider,
 } from '@healform/liquid'
 import { FiPlus } from 'react-icons/fi'
 import { PageHeader } from '../components/PageHeader'
@@ -114,9 +115,10 @@ const DashboardView: React.FC = () => {
                 justify="space-between"
                 align={{ base: 'start', md: 'center' }}
               >
-                <PageHeader title={'Start'} subtitle={`Guten Tag, ${user?.name} 👋`} />
+                <PageHeader title={'Dashboard'} subtitle={`Guten Tag, ${user?.name} 👋`} />
                 <Button leftIcon={<FiPlus fontSize="1.25rem" />}>Neuer Termin</Button>
               </Stack>
+              <Divider />
               <Stack spacing={{ base: '5', lg: '6' }}>
                 <SimpleGrid columns={{ base: 1, md: 1 }} gap="6" mb={5}>
                   <AppointmentNext nextAppointment={nextAppointment} />
