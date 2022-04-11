@@ -9,7 +9,7 @@ export interface Product {
   unavailable: boolean
   expires: null
   appointmentTypeIDs: number[]
-  appointmentTypeCounts: any[] | { [key: string]: number }
+  appointmentTypeCounts: string
   minutes: null
   value: null
   isGiftCertificate: boolean
