@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react'
-import { Stack, Divider, Text, HStack, Button, useToast, Tooltip, SimpleGrid } from '@healform/liquid'
+import { Stack, Divider, HStack, useToast, Tooltip } from '@healform/liquid'
 import { PageHeader } from '../components/PageHeader'
 import Loading from '../components/Loading'
 import Error from '../components/Error'
 import { Certificate } from '../interfaces/Certificate'
 import { IconButton } from '@chakra-ui/react'
-import { FiPlus, FiRefreshCw, FiSettings, FiShoppingCart } from 'react-icons/fi'
-import AppointmentNext from '../components/Appointments/AppointmentNext'
+import { FiRefreshCw, FiShoppingCart } from 'react-icons/fi'
 import CertificateList from '../components/CertificateList'
+import { Product } from '../interfaces/Product'
 
 const CertificatesView: React.FC = () => {
   const { user } = useAuth0()
   const [certificates, setCertificates] = useState<Certificate[]>([])
+  const [products, setProducts] = useState<Product[]>([])
   const [isLoading, setLoading] = useState(true)
   const [isError, setError] = useState(false)
   const toast = useToast()
@@ -24,8 +25,14 @@ const CertificatesView: React.FC = () => {
         .then(json => {
           /* Set certificates */
           setCertificates(json)
-          /* Disable loading */
-          setLoading(false)
+          fetch(`${process.env.REACT_APP_API_URL}` + `/acuity/products`)
+            .then(response => response.json())
+            .then(json => {
+              /* Set products */
+              setProducts(json)
+              /* Disable loading */
+              setLoading(false)
+            })
         })
         .catch(err => {
           if (err.response) {
@@ -90,7 +97,7 @@ const CertificatesView: React.FC = () => {
                 </HStack>
               </Stack>
               <Divider />
-              <CertificateList certificates={certificates} />
+              <CertificateList certificates={certificates} products={products} />
             </Stack>
           </Stack>
         </>
