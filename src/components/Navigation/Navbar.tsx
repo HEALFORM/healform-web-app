@@ -128,7 +128,9 @@ export const Navbar = () => {
                 <MenuList>
                   <MenuItem isDisabled>{user?.name}</MenuItem>
                   <MenuDivider />
-                  <MenuItem icon={<FiUser />}>Profil</MenuItem>
+                  <MenuItem as={NavLink} to={'/profile'} icon={<FiUser />}>
+                    Profil
+                  </MenuItem>
                 </MenuList>
               </Menu>
             </HStack>
