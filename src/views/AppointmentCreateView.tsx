@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react'
+import { withAuthenticationRequired } from '@auth0/auth0-react'
 import Loading from '../components/Loading'
-import { Stack, Divider, Text, HStack, Body, useToast } from '@healform/liquid'
+import { Stack, Divider, Body, useToast } from '@healform/liquid'
 import { PageHeader } from '../components/PageHeader'
 import { RadioCard, RadioCardGroup } from '../components/RadioCardGroup'
 import { Location } from '../interfaces/Location'
+import { Badge, Wrap } from '@chakra-ui/react'
+import { format } from 'date-fns'
+import { de, deAT } from 'date-fns/locale'
 
 const AppointmentCreateView: React.FC = () => {
   const [locations, setLocations] = useState<Location[]>([])
-  const [dates, setDates] = useState()
+  const [dates, setDates] = useState<any[]>([])
   const [isLoading, setLoading] = useState(true)
   const [isError, setError] = useState(false)
   const toast = useToast()
@@ -96,6 +99,18 @@ const AppointmentCreateView: React.FC = () => {
           </RadioCardGroup>
         </Stack>
         <PageHeader title={'Datum auswählen'} subtitle={''} />
+        <Wrap>
+          {dates && dates.length > 0 ? (
+            dates.map(date => (
+              <Body noMargin variant="highlight" color="primary.500">
+                {format(new Date(date.date), 'EE dd.MM.yy', { locale: deAT })}
+              </Body>
+            ))
+          ) : (
+            <Body>Bitte Ort auswählen</Body>
+          )}
+        </Wrap>
+        <PageHeader title={'Zeit auswählen'} subtitle={''} />
       </Stack>
     </>
   )
