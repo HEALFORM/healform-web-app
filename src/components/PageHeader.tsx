@@ -10,7 +10,7 @@ export const PageHeader = (props: PageHeaderProps) => {
   const { title, subtitle } = props
   return (
     <Stack spacing="2">
-      <Headline noMargin size={'two'}>
+      <Headline noMargin size={'four'}>
         {title}
       </Headline>
       <Body variant={'subtle'}>{subtitle}</Body>

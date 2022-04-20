@@ -1,21 +1,4 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  ButtonGroup,
-  Container,
-  Drawer,
-  DrawerContent,
-  DrawerOverlay,
-  Flex,
-  HStack,
-  IconButton,
-  Menu,
-  MenuDivider,
-  useBreakpointValue,
-  useColorModeValue,
-  useDisclosure,
-} from '@chakra-ui/react'
+// @ts-nocheck
 import * as React from 'react'
 import {
   FiBookmark,
@@ -32,7 +15,29 @@ import { Logo } from '../Logo'
 import { Sidebar } from './Sidebar'
 import { ToggleButton } from './ToggleButton'
 import { NavLink } from 'react-router-dom'
-import { MenuButton, MenuItem, MenuList, Tooltip } from '@healform/liquid'
+import {
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Tooltip,
+  Avatar,
+  Box,
+  Button,
+  ButtonGroup,
+  Container,
+  Drawer,
+  DrawerContent,
+  DrawerOverlay,
+  Flex,
+  HStack,
+  IconButton,
+  Menu,
+  MenuDivider,
+  useBreakpointValue,
+  useColorModeValue,
+  useDisclosure,
+} from '@healform/liquid'
+
 import { useAuth0 } from '@auth0/auth0-react'
 
 export const Navbar = () => {
@@ -41,7 +46,7 @@ export const Navbar = () => {
   const { user, logout } = useAuth0()
 
   return (
-    <Box as="nav" bg={useColorModeValue('white', 'black')} position={'fixed'} w={'100%'} zIndex={500}>
+    <Box as="nav" bg={useColorModeValue('white', 'black')} position={'fixed'} w={'100%'} zIndex={500} py={2}>
       <Container py={{ base: '3' }} maxW={'none'}>
         <Flex justify="space-between">
           <HStack spacing="4">
@@ -103,20 +108,21 @@ export const Navbar = () => {
             <HStack spacing="4">
               <ButtonGroup variant="ghost" spacing="1">
                 <Tooltip label={'Hilfe'} hasArrow>
-                  <IconButton icon={<FiHelpCircle fontSize="1.25rem" />} aria-label="Hilfe" />
+                  <IconButton variant="ghost" icon={<FiHelpCircle fontSize="1.25rem" />} aria-label="Hilfe" />
                 </Tooltip>
                 <Tooltip label={'Einstellungen'} hasArrow>
-                  <IconButton icon={<FiSettings fontSize="1.25rem" />} aria-label="Einstellungen" />
+                  <IconButton variant="ghost" icon={<FiSettings fontSize="1.25rem" />} aria-label="Einstellungen" />
                 </Tooltip>
                 <Tooltip label={'Log Out'} hasArrow>
                   <IconButton
+                    variant="ghost"
                     icon={<FiLogOut fontSize="1.25rem" />}
                     aria-label="Log Out"
                     onClick={() => logout({ returnTo: window.location.origin })}
                   />
                 </Tooltip>
                 <Menu>
-                  <MenuButton as={IconButton} aria-label="Options" icon={<FiMoreHorizontal />} />
+                  <MenuButton variant="ghost" as={IconButton} aria-label="Options" icon={<FiMoreHorizontal />} />
                   <MenuList>
                     <MenuItem icon={<FiHelpCircle />}>Stornierungsbedingungen</MenuItem>
                     <MenuItem icon={<FiHelpCircle />}>Rechtliche Hinweise</MenuItem>
@@ -124,7 +130,7 @@ export const Navbar = () => {
                 </Menu>
               </ButtonGroup>
               <Menu>
-                <Avatar name={user?.name} src={user?.picture} as={MenuButton} />
+                <Avatar size="sm" name={user?.name} src={user?.picture} as={MenuButton} />
                 <MenuList>
                   <MenuItem isDisabled>{user?.name}</MenuItem>
                   <MenuDivider />
