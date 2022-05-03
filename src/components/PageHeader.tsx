@@ -1,4 +1,4 @@
-import { Stack, Body, Headline } from '@healform/liquid'
+import { Stack, BodyLarge, Title } from '@healform/liquid'
 import * as React from 'react'
 
 interface PageHeaderProps {
@@ -10,10 +10,10 @@ export const PageHeader = (props: PageHeaderProps) => {
   const { title, subtitle } = props
   return (
     <Stack spacing="2">
-      <Headline noMargin size={'four'}>
+      <Title noMargin size={'six'}>
         {title}
-      </Headline>
-      <Body variant={'subtle'}>{subtitle}</Body>
+      </Title>
+      {subtitle && <BodyLarge>{subtitle}</BodyLarge> }
     </Stack>
   )
 }

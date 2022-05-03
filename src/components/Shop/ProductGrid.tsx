@@ -7,7 +7,6 @@ export const ProductGrid = (props: SimpleGridProps) => {
     return {
       base: Math.min(1, count),
       md: Math.min(2, count),
-      lg: Math.min(3, count),
     }
   }, [props.children])
 

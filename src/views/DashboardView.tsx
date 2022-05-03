@@ -107,36 +107,34 @@ const DashboardView: React.FC = () => {
     } else {
       return (
         <>
-          <Stack spacing={5}>
-            <Stack spacing="2">
+          <Stack spacing={6}>
+            <Stack spacing="4">
               <Stack
                 spacing="4"
                 direction={{ base: 'column', md: 'row' }}
                 justify="space-between"
                 align={{ base: 'start', md: 'center' }}
               >
-                <PageHeader title={'Dashboard'} subtitle={`Guten Tag, ${user?.name} 👋`} />
-                <Button leftIcon={<FiPlus fontSize="1.25rem" />}>Neuer Termin</Button>
+                <PageHeader title={'Dashboard'} />
+                <Button colorScheme="primary" variant="link" leftIcon={<FiPlus fontSize="1.25rem" />}>Neuer Termin</Button>
               </Stack>
-              <Divider />
               <Stack spacing={{ base: '5', lg: '6' }}>
                 <SimpleGrid columns={{ base: 1, md: 1 }} gap="6" mb={5}>
                   <AppointmentNext nextAppointment={nextAppointment} />
                 </SimpleGrid>
               </Stack>
             </Stack>
-            <Stack spacing="2">
-              <Stack spacing="1">
-                <PageHeader
-                  title={'Deine Termine'}
-                  subtitle={'Überblick deiner zukünftigen und vergangenen Termine.'}
-                />
-              </Stack>
+            <Stack spacing="4">
+              <PageHeader
+                title={'Termine'}
+                subtitle={'Überblick deiner zukünftigen und vergangenen Termine.'}
+              />
               <Tabs variant={'unstyled'} colorScheme={'blue'}>
                 <TabList>
                   <Tab
                     color={useColorModeValue('gray.800', 'gray.600')}
                     fontWeight="medium"
+                    fontFamily="heading"
                     borderRadius="xl"
                     _selected={{
                       color: 'primary.500',
@@ -151,6 +149,7 @@ const DashboardView: React.FC = () => {
                   <Tab
                     color={useColorModeValue('gray.800', 'gray.600')}
                     fontWeight="medium"
+                    fontFamily="heading"
                     borderRadius="xl"
                     _selected={{
                       color: 'primary.500',

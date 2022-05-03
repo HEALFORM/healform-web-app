@@ -10,8 +10,8 @@ export const Auth0ProviderWithHistory = ({ children }: PropsWithChildren<any>): 
   const domain: string | undefined = config.domain
   const clientId: string | undefined = config.clientId
 
-  const onRedirectCallback = (appState: AppState) => {
-    navigate(appState?.returnTo || window.location.pathname)
+  const onRedirectCallback = () => {
+    navigate(window.location.pathname)
   }
 
   if (!(domain && clientId)) {

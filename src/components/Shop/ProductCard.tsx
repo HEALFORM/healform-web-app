@@ -31,7 +31,7 @@ export const ProductCard = (props: Props) => {
       {!product.hidden && (
         <Stack spacing={useBreakpointValue({ base: '4', md: '5' })} {...rootProps}>
           <Box position="relative">
-            <AspectRatio ratio={4 / 3}>
+            <AspectRatio ratio={16 / 9}>
               <Image
                 alt={name}
                 src={''}

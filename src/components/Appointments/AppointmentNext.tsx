@@ -1,4 +1,4 @@
-import { Body, FeatureCard, Heading, HStack, Icon, Stack, Headline } from '@healform/liquid'
+import { Body, Box, Heading, HStack, Icon, Stack, Headline, useColorModeValue } from '@healform/liquid'
 import ReactTimeAgo from 'react-time-ago'
 import { FiClock, FiMapPin } from 'react-icons/fi'
 import React from 'react'
@@ -8,17 +8,17 @@ const AppointmentNext = (props: { nextAppointment: any }) => {
   if (!nextAppointment)
     return (
       <>
-        <FeatureCard variant={'neutral'}>
+        <Box bg={useColorModeValue('white', 'gray.900')} p={6} borderRadius="xl">
           <Stack>
-            <Heading fontSize={32}>Du hast noch keinen Termin gebucht.</Heading>
+            <Headline size="three" noMargin>Du hast noch keinen Termin gebucht.</Headline>
           </Stack>
-        </FeatureCard>
+        </Box>
       </>
     )
 
   return (
     <>
-      <FeatureCard variant={'neutral'}>
+      <Box bg={useColorModeValue('white', 'black')}>
         <Stack spacing={2}>
           <HStack>
             <Body noMargin>Nächster Termin:</Body>
@@ -39,7 +39,7 @@ const AppointmentNext = (props: { nextAppointment: any }) => {
             </HStack>
           </Stack>
         </Stack>
-      </FeatureCard>
+      </Box>
     </>
   )
 }

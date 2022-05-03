@@ -59,7 +59,6 @@ export const Navbar = () => {
                   to={'/'}
                   leftIcon={<FiHome />}
                   _activeLink={{ color: 'primary.500' }}
-                  fontWeight={600}
                   color={'currentColor'}
                   transitionDuration={'0ms'}
                 >
@@ -71,7 +70,6 @@ export const Navbar = () => {
                   to={'/neuer-termin'}
                   leftIcon={<FiPlus />}
                   _activeLink={{ color: 'primary.500' }}
-                  fontWeight={600}
                   color={'currentColor'}
                   transitionDuration={'0ms'}
                 >
@@ -83,7 +81,6 @@ export const Navbar = () => {
                   to={'/abonnements'}
                   leftIcon={<FiBookmark />}
                   _activeLink={{ color: 'primary.500' }}
-                  fontWeight={600}
                   color={'currentColor'}
                   transitionDuration={'0ms'}
                 >
@@ -95,7 +92,6 @@ export const Navbar = () => {
                   to={'/shop'}
                   leftIcon={<FiShoppingCart />}
                   _activeLink={{ color: 'primary.500' }}
-                  fontWeight={600}
                   color={'currentColor'}
                   transitionDuration={'0ms'}
                 >

@@ -64,7 +64,7 @@ const AppointmentCreateView: React.FC = () => {
 
   const getAvailableDates = (locationId: string) => {
     const appointmentId = '5780353'
-    fetch(`${process.env.REACT_APP_API_URL}` + `/acuity/availability/dates/` + appointmentId + `/2022-04/` + locationId)
+    fetch(`${process.env.REACT_APP_API_URL}` + `/acuity/availability/dates/` + appointmentId + `/2022-05/` + locationId)
       .then(response => response.json())
       .then(json => {
         setDates(json)
