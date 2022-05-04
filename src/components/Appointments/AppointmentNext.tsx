@@ -8,7 +8,7 @@ const AppointmentNext = (props: { nextAppointment: any }) => {
   if (!nextAppointment)
     return (
       <>
-        <Box bg={useColorModeValue('white', 'gray.900')} p={6} borderRadius="xl">
+        <Box bg={useColorModeValue('primary.100', 'gray.900')} p={6} borderRadius="xl">
           <Stack>
             <Headline size="three" noMargin>Du hast noch keinen Termin gebucht.</Headline>
           </Stack>
