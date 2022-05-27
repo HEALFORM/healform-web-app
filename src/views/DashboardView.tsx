@@ -19,6 +19,8 @@ import {
   useToast,
   useColorModeValue,
   Divider,
+  Headline,
+  Body,
 } from '@healform/liquid'
 import { FiPlus } from 'react-icons/fi'
 import { PageHeader } from '../components/PageHeader'
@@ -99,12 +101,6 @@ const DashboardView: React.FC = () => {
     getAppointmentByUser(user?.email)
   }, [toast, user?.email])
 
-  if (isLoading) {
-    return <Loading />
-  } else {
-    if (isError) {
-      return <Error />
-    } else {
       return (
         <>
           <Stack spacing={6}>
@@ -119,16 +115,16 @@ const DashboardView: React.FC = () => {
                 <Button colorScheme="primary" variant="link" leftIcon={<FiPlus fontSize="1.25rem" />}>Neuer Termin</Button>
               </Stack>
               <Stack spacing={{ base: '5', lg: '6' }}>
-                <SimpleGrid columns={{ base: 1, md: 1 }} gap="6" mb={5}>
+                <SimpleGrid columns={{ base: 1, md: 1 }} gap="6">
                   <AppointmentNext nextAppointment={nextAppointment} />
                 </SimpleGrid>
               </Stack>
             </Stack>
             <Stack spacing="4">
-              <PageHeader
-                title={'Termine'}
-                subtitle={'Überblick deiner zukünftigen und vergangenen Termine.'}
-              />
+              <Stack>
+                <Headline noMargin size="four">Deine Termine</Headline>
+                <Body>Überblick deiner zukünftigen und vergangenen Termine.</Body>
+              </Stack>
               <Tabs variant={'unstyled'} colorScheme={'blue'}>
                 <TabList>
                   <Tab
@@ -178,8 +174,6 @@ const DashboardView: React.FC = () => {
           </Stack>
         </>
       )
-    }
-  }
 }
 
 export default withAuthenticationRequired(DashboardView, {

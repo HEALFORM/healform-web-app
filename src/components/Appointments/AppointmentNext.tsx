@@ -1,4 +1,4 @@
-import { Body, Box, Heading, HStack, Icon, Stack, Headline, useColorModeValue } from '@healform/liquid'
+import { Body, Box, Heading, HStack, Icon, Stack, Headline, useColorModeValue, Card } from '@healform/liquid'
 import ReactTimeAgo from 'react-time-ago'
 import { FiClock, FiMapPin } from 'react-icons/fi'
 import React from 'react'
@@ -8,38 +8,28 @@ const AppointmentNext = (props: { nextAppointment: any }) => {
   if (!nextAppointment)
     return (
       <>
-        <Box bg={useColorModeValue('primary.100', 'gray.900')} p={6} borderRadius="xl">
-          <Stack>
-            <Headline size="three" noMargin>Du hast noch keinen Termin gebucht.</Headline>
-          </Stack>
-        </Box>
+        <Stack spacing={2}>
+          <Headline size="four" noMargin>Dein nächster Termin:</Headline>
+          <Body>Du hast noch keinen Termin gebucht.</Body>
+        </Stack>
       </>
     )
 
   return (
     <>
-      <Box bg={useColorModeValue('white', 'black')}>
-        <Stack spacing={2}>
-          <HStack>
-            <Body noMargin>Nächster Termin:</Body>
-          </HStack>
-          <Headline color={'primary.500'} as={'h2'}>
-            <ReactTimeAgo date={Date.parse(nextAppointment.datetime)} locale="de-DE" />
-          </Headline>
-          <Stack spacing={1} color={'gray.500'}>
-            <HStack>
-              <Icon as={FiClock} />
-              <Body>
-                Am {nextAppointment?.date} um {nextAppointment?.time} Uhr
-              </Body>
-            </HStack>
-            <HStack>
-              <Icon as={FiMapPin} />
-              <Body>{nextAppointment?.location}</Body>
-            </HStack>
-          </Stack>
-        </Stack>
-      </Box>
+      <Stack spacing={2}>
+        <Headline size="four" noMargin>Dein nächster Termin:</Headline>
+        <HStack>
+          <Icon as={FiClock} />
+          <Body>
+            Am {nextAppointment?.date} um {nextAppointment?.time} Uhr
+          </Body>
+        </HStack>
+        <HStack>
+          <Icon as={FiMapPin} />
+          <Body>{nextAppointment?.location}</Body>
+        </HStack>
+      </Stack>
     </>
   )
 }

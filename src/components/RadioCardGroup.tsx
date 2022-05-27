@@ -72,10 +72,18 @@ export const RadioCard = (props: RadioCardProps) => {
           zIndex: 1,
         },
       }}
+      borderWidth="1px"
+      borderColor={state.isChecked ? "primary.500" : "gray.200"}
+      borderRadius="sm"
+      p={3}
+      transition="all .2s"
+      _hover={{
+        borderColor: "primary.300"
+      }}
     >
       <input {...inputProps} aria-labelledby={id} />
       <Box sx={styles} {...checkboxProps} {...rest}>
-        <Stack direction="row">
+        <Stack direction="row" alignItems="center">
           <Box flex="1">{children}</Box>
           {state.isChecked ? (
             <Circle bg="primary.500" size="4">
