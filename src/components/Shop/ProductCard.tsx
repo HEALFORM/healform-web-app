@@ -1,3 +1,4 @@
+import { StackProps } from '@chakra-ui/react'
 import {
   AspectRatio,
   Box,
@@ -11,12 +12,12 @@ import {
   useColorModeValue,
   Headline,
 } from '@healform/liquid'
-import { StackProps } from '@chakra-ui/react'
 import * as React from 'react'
-import { Rating } from './Rating'
+
+import { Product } from '../../interfaces/Product'
 import { FavouriteButton } from './FavouriteButton'
 import { PriceTag } from './PriceTag'
-import { Product } from '../../interfaces/Product'
+import { Rating } from './Rating'
 
 interface Props {
   product: Product

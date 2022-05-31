@@ -1,7 +1,8 @@
-import { AppState, Auth0Provider } from '@auth0/auth0-react'
+import { Auth0Provider } from '@auth0/auth0-react'
 import React, { PropsWithChildren } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getConfig } from './../config'
+
+import { getConfig } from '../config'
 
 export const Auth0ProviderWithHistory = ({ children }: PropsWithChildren<any>): JSX.Element | null => {
   const navigate = useNavigate()

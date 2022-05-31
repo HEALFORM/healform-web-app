@@ -1,6 +1,5 @@
-import { Box, IconButton, IconButtonProps } from '@healform/liquid'
 import { chakra } from '@chakra-ui/react'
-
+import { Box, IconButton, IconButtonProps } from '@healform/liquid'
 import * as React from 'react'
 
 const Bar = chakra('span', {

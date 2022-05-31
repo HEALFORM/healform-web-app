@@ -3,17 +3,17 @@ import * as React from 'react'
 
 interface PageHeaderProps {
   title: string
-  subtitle: string
+  subtitle?: string
 }
 
 export const PageHeader = (props: PageHeaderProps) => {
   const { title, subtitle } = props
   return (
-    <Stack spacing="2">
+    <Stack spacing="1">
       <Title noMargin size={'six'}>
         {title}
       </Title>
-      {subtitle && <BodyLarge>{subtitle}</BodyLarge> }
+      {subtitle && <BodyLarge>{subtitle}</BodyLarge>}
     </Stack>
   )
 }

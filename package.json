@@ -26,6 +26,8 @@
     "web-vitals": "^2.1.2"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "^12.1.5",
+    "@trivago/prettier-plugin-sort-imports": "^3.2.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.5",
     "@testing-library/user-event": "^13.5.0",
@@ -33,15 +35,28 @@
     "@types/node": "^16.11.36",
     "@types/react": "^17.0.45",
     "@types/react-dom": "^17.0.17",
-    "eslint": "^8.15.0",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
+    "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.0.0"
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "cy:open": "yarn --cwd cypress cy:open",
+    "cy:run": "yarn --cwd cypress cy:run",
+    "cy:run:cy": "yarn --cwd cypress cy:run:ci",
+    "dev": "next",
+    "lint": "eslint --no-error-on-unmatched-pattern --cache --fix --report-unused-disable-directives {src}/**/*.{js,ts,jsx,tsx}",
+    "prepare": "husky install",
+    "start": "react-scripts start",
+    "test": "jest --runInBand --coverage=false",
+    "test:ci": "yarn test --ci",
+    "test:watch": "yarn test --watch",
+    "ts:check": "tsc --noEmit"
   },
   "eslintConfig": {
     "extends": [

@@ -1,5 +1,6 @@
 import { withAuthenticationRequired } from '@auth0/auth0-react'
 import React, { ComponentType } from 'react'
+
 import Loading from './Loading'
 
 interface ProtectedRouteProps {

@@ -1,8 +1,9 @@
-import { Body, Box, Stack, useColorModeValue, Tooltip } from '@healform/liquid'
 import { StackDivider, IconButton } from '@chakra-ui/react'
+import { Body, Box, Stack, useColorModeValue, Tooltip } from '@healform/liquid'
 import React from 'react'
 import { FiCalendar, FiEye, FiTrash } from 'react-icons/fi'
 import { NavLink } from 'react-router-dom'
+
 import { Appointment } from '../../interfaces/Appointment'
 
 const AppointmentList = (props: { appointments: Appointment[] }) => {

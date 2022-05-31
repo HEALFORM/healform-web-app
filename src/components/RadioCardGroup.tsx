@@ -12,6 +12,7 @@ import {
   UseRadioProps,
   useStyleConfig,
 } from '@chakra-ui/react'
+import { useColorModeValue } from '@healform/liquid'
 import React from 'react'
 
 interface RadioCardGroupProps<T> extends Omit<StackProps, 'onChange'> {
@@ -73,12 +74,12 @@ export const RadioCard = (props: RadioCardProps) => {
         },
       }}
       borderWidth="1px"
-      borderColor={state.isChecked ? "primary.500" : "gray.200"}
+      borderColor={state.isChecked ? 'primary.500' : useColorModeValue('gray.200', 'gray.800')}
       borderRadius="sm"
       p={3}
       transition="all .2s"
       _hover={{
-        borderColor: "primary.300"
+        borderColor: 'gray.300',
       }}
     >
       <input {...inputProps} aria-labelledby={id} />

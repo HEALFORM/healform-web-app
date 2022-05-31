@@ -1,11 +1,5 @@
 // @ts-nocheck
-import React, { useEffect, useState } from 'react'
 import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react'
-import AppointmentList from '../components/Appointments/AppointmentList'
-import AppointmentNext from '../components/Appointments/AppointmentNext'
-import Loading from '../components/Loading'
-import Error from '../components/Error'
-import { Appointment } from '../interfaces/Appointment'
 import {
   Stack,
   SimpleGrid,
@@ -20,12 +14,19 @@ import {
   useColorModeValue,
   Divider,
   Headline,
-  Body,
+  Skeleton,
 } from '@healform/liquid'
-import { FiPlus } from 'react-icons/fi'
-import { PageHeader } from '../components/PageHeader'
-import moment from 'moment'
 import _ from 'lodash'
+import moment from 'moment'
+import React, { useEffect, useState } from 'react'
+import { FiPlus } from 'react-icons/fi'
+
+import AppointmentList from '../components/Appointments/AppointmentList'
+import AppointmentNext from '../components/Appointments/AppointmentNext'
+import Error from '../components/Error'
+import Loading from '../components/Loading'
+import { PageHeader } from '../components/PageHeader'
+import { Appointment } from '../interfaces/Appointment'
 
 const DashboardView: React.FC = () => {
   const { user } = useAuth0()
@@ -101,79 +102,93 @@ const DashboardView: React.FC = () => {
     getAppointmentByUser(user?.email)
   }, [toast, user?.email])
 
-      return (
-        <>
-          <Stack spacing={6}>
-            <Stack spacing="4">
-              <Stack
-                spacing="4"
-                direction={{ base: 'column', md: 'row' }}
-                justify="space-between"
-                align={{ base: 'start', md: 'center' }}
-              >
-                <PageHeader title={'Dashboard'} />
-                <Button colorScheme="primary" variant="link" leftIcon={<FiPlus fontSize="1.25rem" />}>Neuer Termin</Button>
-              </Stack>
-              <Stack spacing={{ base: '5', lg: '6' }}>
-                <SimpleGrid columns={{ base: 1, md: 1 }} gap="6">
-                  <AppointmentNext nextAppointment={nextAppointment} />
-                </SimpleGrid>
-              </Stack>
-            </Stack>
-            <Stack spacing="4">
-              <Stack>
-                <Headline noMargin size="four">Deine Termine</Headline>
-                <Body>Überblick deiner zukünftigen und vergangenen Termine.</Body>
-              </Stack>
-              <Tabs variant={'unstyled'} colorScheme={'blue'}>
-                <TabList>
-                  <Tab
-                    color={useColorModeValue('gray.800', 'gray.600')}
-                    fontWeight="medium"
-                    fontFamily="heading"
-                    borderRadius="xl"
-                    _selected={{
-                      color: 'primary.500',
-                      bg: useColorModeValue('primary.100', 'whiteAlpha.100'),
-                    }}
-                    _focus={{
-                      boxShadow: 'none',
-                    }}
-                  >
-                    Zukünftige Termine
-                  </Tab>
-                  <Tab
-                    color={useColorModeValue('gray.800', 'gray.600')}
-                    fontWeight="medium"
-                    fontFamily="heading"
-                    borderRadius="xl"
-                    _selected={{
-                      color: 'primary.500',
-                      bg: useColorModeValue('primary.100', 'whiteAlpha.100'),
-                    }}
-                    _focus={{
-                      boxShadow: 'none',
-                    }}
-                  >
-                    Vergangene Termine
-                  </Tab>
-                </TabList>
-                <TabPanels>
-                  <TabPanel px={0}>
-                    <AppointmentList appointments={futureAppointments} />
-                  </TabPanel>
-                  <TabPanel px={0}>
-                    <AppointmentList appointments={pastAppointments} />
-                  </TabPanel>
-                </TabPanels>
-              </Tabs>
-              <Center>
-                <Button>Weitere Termine laden</Button>
-              </Center>
-            </Stack>
+  return (
+    <>
+      <Stack spacing={6}>
+        <Stack spacing="3">
+          <Stack
+            spacing="4"
+            direction={{ base: 'column', md: 'row' }}
+            justify="space-between"
+            align={{ base: 'start', md: 'center' }}
+          >
+            <PageHeader title={'Dashboard'} subtitle={'Deine erworbenen 10er-, 50er- oder 100er-Karten'} />
+            <Button
+              colorScheme="primary"
+              variant="solid"
+              leftIcon={<FiPlus fontSize="1.25rem" />}
+              display={{ base: 'none', lg: 'flex' }}
+              size="sm"
+            >
+              Neuer Termin
+            </Button>
           </Stack>
-        </>
-      )
+          <Divider />
+          <Stack spacing={{ base: '5', lg: '6' }}>
+            <SimpleGrid columns={{ base: 1, md: 1 }} gap="6">
+              <Skeleton isLoaded={!isLoading}>
+                <AppointmentNext nextAppointment={nextAppointment} />
+              </Skeleton>
+            </SimpleGrid>
+          </Stack>
+        </Stack>
+        <Stack spacing="3">
+          <Headline noMargin size="four">
+            Deine Termine
+          </Headline>
+          <Skeleton isLoaded={!isLoading}>
+            <Tabs variant={'unstyled'} colorScheme={'blue'}>
+              <TabList>
+                <Tab
+                  color={useColorModeValue('gray.800', 'gray.600')}
+                  fontWeight="medium"
+                  fontFamily="heading"
+                  borderRadius="xl"
+                  fontSize={14}
+                  _selected={{
+                    color: 'primary.500',
+                    bg: useColorModeValue('primary.100', 'whiteAlpha.100'),
+                  }}
+                  _focus={{
+                    boxShadow: 'none',
+                  }}
+                >
+                  Zukünftige Termine
+                </Tab>
+                <Tab
+                  color={useColorModeValue('gray.800', 'gray.600')}
+                  fontWeight="medium"
+                  fontFamily="heading"
+                  borderRadius="xl"
+                  fontSize={14}
+                  _selected={{
+                    color: 'primary.500',
+                    bg: useColorModeValue('primary.100', 'whiteAlpha.100'),
+                  }}
+                  _focus={{
+                    boxShadow: 'none',
+                  }}
+                >
+                  Vergangene Termine
+                </Tab>
+              </TabList>
+              <TabPanels>
+                <TabPanel px={0} pt={2}>
+                  <AppointmentList appointments={futureAppointments} />
+                </TabPanel>
+                <TabPanel px={0} pt={2}>
+                  <AppointmentList appointments={pastAppointments} />
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+          </Skeleton>
+          <Center>
+            <Button>Weitere Termine laden</Button>
+          </Center>
+        </Stack>
+      </Stack>
+    </>
+  )
 }
 
 export default withAuthenticationRequired(DashboardView, {

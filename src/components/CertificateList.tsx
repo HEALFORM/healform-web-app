@@ -1,6 +1,7 @@
-import { Body, Box, Stack, useColorModeValue, CircularProgress, CircularProgressLabel, HStack } from '@healform/liquid'
 import { StackDivider } from '@chakra-ui/react'
+import { Body, Box, Stack, useColorModeValue } from '@healform/liquid'
 import React from 'react'
+
 import { Certificate } from '../interfaces/Certificate'
 import { Product } from '../interfaces/Product'
 

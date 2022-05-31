@@ -1,6 +1,5 @@
-import React from 'react'
 import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react'
-import Loading from '../components/Loading'
+import { StackDivider, InputGroup, InputLeftAddon, FormHelperText } from '@chakra-ui/react'
 import {
   Stack,
   Button,
@@ -14,7 +13,9 @@ import {
   Flex,
   HStack,
 } from '@healform/liquid'
-import { StackDivider, InputGroup, InputLeftAddon, FormHelperText } from '@chakra-ui/react'
+import React from 'react'
+
+import Loading from '../components/Loading'
 import { PageHeader } from '../components/PageHeader'
 
 const ProfileView: React.FC = () => {

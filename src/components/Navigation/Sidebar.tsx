@@ -1,5 +1,5 @@
+import { useAuth0 } from '@auth0/auth0-react'
 import { Divider, Flex, Menu, MenuList, MenuButton, MenuItem, Stack, useColorModeValue } from '@healform/liquid'
-import { NavLink } from 'react-router-dom'
 import * as React from 'react'
 import {
   FiBookmark,
@@ -7,14 +7,15 @@ import {
   FiHelpCircle,
   FiHome,
   FiSettings,
-  FiUsers,
+  FiShoppingCart,
   FiMoreHorizontal,
   FiLogOut,
 } from 'react-icons/fi'
+import { NavLink } from 'react-router-dom'
+
 import { Logo } from '../Logo'
-import { NavButton } from './NavButton'
 import { UserProfile } from '../UserProfile'
-import { useAuth0 } from '@auth0/auth0-react'
+import { NavButton } from './NavButton'
 
 export const Sidebar: React.FC = () => {
   const { logout } = useAuth0()
@@ -46,12 +47,18 @@ export const Sidebar: React.FC = () => {
                 icon={FiPlus}
                 _activeLink={{ fontWeight: 'bold', bg: 'rgba(91, 104, 229, .1)', color: 'primary.500' }}
               />
-              <NavButton label="Abonnements" icon={FiBookmark} />
               <NavButton
                 as={NavLink}
-                to={'/profile'}
-                label="Profil"
-                icon={FiUsers}
+                to={'/abonnements'}
+                label="Abonnements"
+                icon={FiBookmark}
+                _activeLink={{ fontWeight: 'bold', bg: 'rgba(91, 104, 229, .1)', color: 'primary.500' }}
+              />
+              <NavButton
+                as={NavLink}
+                to={'/shop'}
+                label="Shop"
+                icon={FiShoppingCart}
                 _activeLink={{ fontWeight: 'bold', bg: 'rgba(91, 104, 229, .1)', color: 'primary.500' }}
               />
             </Stack>

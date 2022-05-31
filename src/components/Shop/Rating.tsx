@@ -17,13 +17,8 @@ export const Rating = (props: Props) => {
     <HStack spacing="0.5" {...rootProps}>
       {Array.from({ length: max })
         .map((_, index) => index + 1)
-        .map((index) => (
-          <Icon
-            key={index}
-            as={FaStar}
-            fontSize={size}
-            color={index <= defaultValue ? activeColor : color}
-          />
+        .map(index => (
+          <Icon key={index} as={FaStar} fontSize={size} color={index <= defaultValue ? activeColor : color} />
         ))}
     </HStack>
   )

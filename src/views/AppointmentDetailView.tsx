@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react'
 import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react'
-import Loading from '../components/Loading'
-import { useParams } from 'react-router-dom'
-import { Appointment } from '../interfaces/Appointment'
 import { Button, SimpleGrid, Stack, useToast } from '@healform/liquid'
-import Error from '../components/Error'
-import { PageHeader } from '../components/PageHeader'
+import React, { useEffect, useState } from 'react'
 import { FiPlus } from 'react-icons/fi'
+import { useParams } from 'react-router-dom'
+
+import Error from '../components/Error'
+import Loading from '../components/Loading'
+import { PageHeader } from '../components/PageHeader'
+import { Appointment } from '../interfaces/Appointment'
 
 const AppointmentDetailView: React.FC = () => {
   const { id } = useParams()

@@ -1,7 +1,6 @@
-import { Body, Box, Heading, HStack, Icon, Stack, Headline, useColorModeValue, Card } from '@healform/liquid'
-import ReactTimeAgo from 'react-time-ago'
-import { FiClock, FiMapPin } from 'react-icons/fi'
+import { Body, HStack, Icon, Stack, Headline } from '@healform/liquid'
 import React from 'react'
+import { FiClock, FiMapPin } from 'react-icons/fi'
 
 const AppointmentNext = (props: { nextAppointment: any }) => {
   const { nextAppointment } = props
@@ -9,7 +8,9 @@ const AppointmentNext = (props: { nextAppointment: any }) => {
     return (
       <>
         <Stack spacing={2}>
-          <Headline size="four" noMargin>Dein nächster Termin:</Headline>
+          <Headline size="four" noMargin>
+            Dein nächster Termin:
+          </Headline>
           <Body>Du hast noch keinen Termin gebucht.</Body>
         </Stack>
       </>
@@ -18,7 +19,9 @@ const AppointmentNext = (props: { nextAppointment: any }) => {
   return (
     <>
       <Stack spacing={2}>
-        <Headline size="four" noMargin>Dein nächster Termin:</Headline>
+        <Headline size="four" noMargin>
+          Dein nächster Termin:
+        </Headline>
         <HStack>
           <Icon as={FiClock} />
           <Body>

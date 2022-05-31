@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
 import { withAuthenticationRequired } from '@auth0/auth0-react'
-import { Stack, Divider, HStack, useToast, Tooltip } from '@healform/liquid'
-import { PageHeader } from '../components/PageHeader'
-import Loading from '../components/Loading'
+import { Stack, Divider, HStack, useToast } from '@healform/liquid'
+import React, { useEffect, useState } from 'react'
+
 import Error from '../components/Error'
-import { Product } from '../interfaces/Product'
-import { IconButton } from '@chakra-ui/react'
-import { ProductGrid } from '../components/Shop/ProductGrid'
+import Loading from '../components/Loading'
+import { PageHeader } from '../components/PageHeader'
 import { ProductCard } from '../components/Shop/ProductCard'
+import { ProductGrid } from '../components/Shop/ProductGrid'
+import { Product } from '../interfaces/Product'
 
 const ShopView: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([])
