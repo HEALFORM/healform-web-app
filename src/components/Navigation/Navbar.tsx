@@ -21,11 +21,11 @@ import {
   useBreakpointValue,
   useColorModeValue,
   useDisclosure,
-  HealformIcon,
+  Center,
+  Tooltip,
 } from '@healform/liquid'
 import * as React from 'react'
 import {
-  FiBookmark,
   FiPlus,
   FiHelpCircle,
   FiHome,
@@ -33,9 +33,11 @@ import {
   FiSettings,
   FiShoppingCart,
   FiUser,
-  FiChevronDown,
   FiMessageCircle,
   FiLifeBuoy,
+  FiMenu,
+  FiShoppingBag,
+  FiAward,
 } from 'react-icons/fi'
 import { NavLink } from 'react-router-dom'
 
@@ -84,7 +86,7 @@ export const Navbar = () => {
                   size={'md'}
                   as={NavLink}
                   to={'/abonnements'}
-                  leftIcon={<FiBookmark />}
+                  leftIcon={<FiAward />}
                   _activeLink={{ color: 'primary.500' }}
                   color={'currentColor'}
                   transitionDuration={'0ms'}
@@ -95,7 +97,7 @@ export const Navbar = () => {
                   size={'md'}
                   as={NavLink}
                   to={'/shop'}
-                  leftIcon={<FiShoppingCart />}
+                  leftIcon={<FiShoppingBag />}
                   _activeLink={{ color: 'primary.500' }}
                   color={'currentColor'}
                   transitionDuration={'0ms'}
@@ -107,64 +109,34 @@ export const Navbar = () => {
           </HStack>
           {isDesktop ? (
             <HStack spacing="2">
+              <Tooltip label="Warenkorb" hasArrow openDelay={500}>
+                <Box>
+                  <IconButton
+                    size="sm"
+                    icon={<FiShoppingCart />}
+                    transition="none"
+                    textAlign="center"
+                    aria-label="Warenkorb"
+                  />
+                </Box>
+              </Tooltip>
               <Menu>
-                <Avatar size="sm" name={user?.name} src={user?.picture} as={MenuButton} />
-                <MenuList borderWidth={0} boxShadow="md" borderRadius="sm" py={2} px={2} minW="auto">
-                  <MenuItem borderRadius="sm" px={2}>
-                    <Avatar size="sm" name={user?.name} src={user?.picture} boxSize="1.2rem" mr={'.8rem'} />
-                    <Body size="two" fontFamily="heading" noMargin>
-                      {user?.name}
-                    </Body>
-                  </MenuItem>
-                  <MenuDivider />
-                  <MenuItem borderRadius="sm" as={NavLink} to={'/profile'} icon={<FiUser size="1.2rem" />} px={2}>
-                    <Body size="two" fontFamily="heading" noMargin>
-                      Profil
-                    </Body>
-                  </MenuItem>
-                  <MenuItem borderRadius="sm" as={NavLink} to={'/settings'} icon={<FiSettings size="1.2rem" />} px={2}>
-                    <Body size="two" fontFamily="heading" noMargin>
-                      Einstellungen
-                    </Body>
-                  </MenuItem>
-                  <MenuItem
-                    borderRadius="sm"
-                    icon={<FiLogOut size="1.2rem" />}
-                    px={2}
-                    aria-label="Log Out"
-                    onClick={() => logout({ returnTo: window.location.origin })}
-                  >
-                    <Body size="two" fontFamily="heading" noMargin>
-                      Logout
-                    </Body>
-                  </MenuItem>
-                  <MenuDivider />
-                  <MenuItem borderRadius="sm" icon={<FiMessageCircle size="1.2rem" />} px={2}>
-                    <Body size="two" fontFamily="heading" noMargin>
-                      Support-Center
-                    </Body>
-                  </MenuItem>
-                  <MenuItem borderRadius="sm" icon={<FiHelpCircle size="1.2rem" />} px={2}>
-                    <Body size="two" fontFamily="heading" noMargin>
-                      Stornierung
-                    </Body>
-                  </MenuItem>
-                  <MenuItem borderRadius="sm" icon={<FiLifeBuoy size="1.2rem" />} px={2}>
-                    <Body size="two" fontFamily="heading" noMargin>
-                      Rechtliche Hinweise
-                    </Body>
-                  </MenuItem>
-                </MenuList>
-              </Menu>
-              <Menu>
-                <MenuButton
-                  size="sm"
-                  name={user?.name}
-                  src={user?.picture}
-                  as={IconButton}
-                  icon={<FiChevronDown />}
-                  transition="none"
-                />
+                <Tooltip label="Menü" hasArrow openDelay={500}>
+                  <Box>
+                    <IconButton
+                      size="sm"
+                      as={MenuButton}
+                      icon={
+                        <Center>
+                          <FiMenu />
+                        </Center>
+                      }
+                      transition="none"
+                      textAlign="center"
+                      aria-label="Menü"
+                    />
+                  </Box>
+                </Tooltip>
                 <MenuList borderWidth={0} boxShadow="md" borderRadius="sm" py={2} px={2}>
                   <MenuItem borderRadius="sm" px={2}>
                     <Avatar size="sm" name={user?.name} src={user?.picture} boxSize="1.2rem" mr={2} />
@@ -212,6 +184,11 @@ export const Navbar = () => {
                   </MenuItem>
                 </MenuList>
               </Menu>
+              <Tooltip label={user?.name} hasArrow openDelay={500}>
+                <Box>
+                  <Avatar size="sm" name={user?.name} src={user?.picture} />
+                </Box>
+              </Tooltip>
             </HStack>
           ) : (
             <>

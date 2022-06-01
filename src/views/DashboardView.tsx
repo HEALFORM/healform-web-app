@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react'
+import { IconButton } from '@chakra-ui/react'
 import {
   Stack,
   SimpleGrid,
@@ -15,11 +16,13 @@ import {
   Divider,
   Headline,
   Skeleton,
+  Tooltip,
+  HStack,
 } from '@healform/liquid'
 import _ from 'lodash'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
-import { FiPlus } from 'react-icons/fi'
+import { FiCalendar, FiPlus, FiRefreshCw, FiShoppingCart } from 'react-icons/fi'
 
 import AppointmentList from '../components/Appointments/AppointmentList'
 import AppointmentNext from '../components/Appointments/AppointmentNext'
@@ -112,16 +115,23 @@ const DashboardView: React.FC = () => {
             justify="space-between"
             align={{ base: 'start', md: 'center' }}
           >
-            <PageHeader title={'Dashboard'} subtitle={'Deine erworbenen 10er-, 50er- oder 100er-Karten'} />
-            <Button
-              colorScheme="primary"
-              variant="solid"
-              leftIcon={<FiPlus fontSize="1.25rem" />}
-              display={{ base: 'none', lg: 'flex' }}
-              size="sm"
-            >
-              Neuer Termin
-            </Button>
+            <PageHeader
+              title={'Dashboard'}
+              subtitle={
+                'Ein Überblick deiner zukünftigen sowie vergangene Termine. Hier kannst du auch Termine stornieren und umbuchen.'
+              }
+            />
+            <HStack spacing="2">
+              <Tooltip label={'Neuen Termin vereinbaren'}>
+                <IconButton
+                  icon={<FiCalendar />}
+                  aria-label="Aktualisieren"
+                  size="sm"
+                  variant="solid"
+                  colorScheme="primary"
+                />
+              </Tooltip>
+            </HStack>
           </Stack>
           <Divider />
           <Stack spacing={{ base: '5', lg: '6' }}>

@@ -45,17 +45,11 @@ export const ProductCard = (props: Props) => {
           </Box>
           <Stack>
             <Stack spacing="1">
-              <Headline noMargin size={'three'} color={useColorModeValue('gray.700', 'gray.400')} as={'h3'}>
+              <Headline noMargin size={'four'} color={useColorModeValue('gray.800', 'gray.400')} as={'h3'}>
                 {name}
               </Headline>
               <PriceTag price={price} currency="EUR" />
             </Stack>
-            <HStack>
-              <Rating defaultValue={4} size="sm" />
-              <Text fontSize="sm" color={useColorModeValue('gray.600', 'gray.400')}>
-                12 Reviews
-              </Text>
-            </HStack>
           </Stack>
           <Stack align="center">
             <Button colorScheme="primary" isFullWidth>

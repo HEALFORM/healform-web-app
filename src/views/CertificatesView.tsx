@@ -76,23 +76,28 @@ const CertificatesView: React.FC = () => {
       <Stack spacing={6}>
         <Stack spacing="3">
           <Stack
-            spacing="4"
+            spacing="6"
             direction={{ base: 'column', md: 'row' }}
             justify="space-between"
             align={{ base: 'start', md: 'center' }}
           >
-            <PageHeader title={'Abonnements'} subtitle={'Deine erworbenen 10er-, 50er- oder 100er-Karten'} />
-            <HStack spacing="3">
+            <PageHeader
+              title={'Abonnements'}
+              subtitle={
+                'Hier erhältst du einen Überblick über deine erworbenen und aktiven HEALFORM® 10er-, 50er- oder 100er-Karten und deren Restguthaben.'
+              }
+            />
+            <HStack spacing="2">
               <Tooltip label={'Aktualisieren'} hasArrow>
-                <IconButton icon={<FiRefreshCw fontSize="1.25rem" />} aria-label="Aktualisieren" />
+                <IconButton icon={<FiRefreshCw />} aria-label="Aktualisieren" size="sm" />
               </Tooltip>
-              <Tooltip label={'Neues Abonnement bestellen'} hasArrow>
-                <IconButton icon={<FiShoppingCart fontSize="1.25rem" />} aria-label="Neues Abonnement bestellen" />
+              <Tooltip label={'Zum Shop'} hasArrow>
+                <IconButton icon={<FiShoppingCart />} aria-label="Neues Abonnement bestellen" size="sm" />
               </Tooltip>
             </HStack>
           </Stack>
           <Divider />
-          <CertificateList certificates={certificates} products={products} />
+          {isLoading ? <Loading /> : <CertificateList certificates={certificates} products={products} />}
         </Stack>
       </Stack>
     </>

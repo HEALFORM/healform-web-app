@@ -93,14 +93,12 @@ const AppointmentCreateView: React.FC = () => {
     <>
       <Stack spacing={6}>
         <Stack spacing="3">
-          <Stack
-            spacing="4"
-            direction={{ base: 'column', md: 'row' }}
-            justify="space-between"
-            align={{ base: 'start', md: 'center' }}
-          >
-            <PageHeader title={'Neuer Termin'} subtitle={'Deine erworbenen 10er-, 50er- oder 100er-Karten'} />
-          </Stack>
+          <PageHeader
+            title={'Neuer Termin'}
+            subtitle={
+              'Wähle zuerst den Ort und im nächsten Schritt einen passenden Termin aus. Bezahlen kannst du mit deiner 10er-, 50er- oder 100er-Karte. Natürlich auch mit PayPal, Gutschein und Kreditkarte.'
+            }
+          />
           <Divider />
           <Headline size="four">1. Cryocenter auswählen</Headline>
           {isLocationsLoading ? (

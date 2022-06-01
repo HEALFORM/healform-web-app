@@ -61,42 +61,34 @@ const ShopView: React.FC = () => {
     getProducts()
   }, [toast])
 
-  if (isLoading) {
-    return <Loading />
+  if (isError) {
+    return <Error />
   } else {
-    if (isError) {
-      return <Error />
-    } else {
-      return (
-        <>
-          <Stack spacing={5}>
-            <Stack spacing="2">
-              <Stack
-                spacing="4"
-                direction={{ base: 'column', md: 'row' }}
-                justify="space-between"
-                align={{ base: 'start', md: 'center' }}
-              >
-                <HStack spacing="3">
-                  <PageHeader
-                    title={'Shop'}
-                    subtitle={
-                      'Das Zertifikat wird im Anschluss einer erfolgreichen Transaktion in Ihrem Account hinterlegt. Im Anschluss an den Bestellprozess können Sie Ihre Termine individuell vereinbaren.'
-                    }
-                  />
-                </HStack>
-              </Stack>
-              <Divider />
+    return (
+      <>
+        <Stack spacing={6}>
+          <Stack spacing="3">
+            <PageHeader
+              title={'Shop'}
+              subtitle={
+                'Das Zertifikat wird im Anschluss einer erfolgreichen Transaktion in Ihrem Account hinterlegt.\n' +
+                'Im Anschluss an den Bestellprozess können Sie Ihre Termine individuell vereinbaren.'
+              }
+            />
+            <Divider />
+            {isLoading ? (
+              <Loading />
+            ) : (
               <ProductGrid>
                 {products.map(product => (
                   <ProductCard key={product.id} product={product} />
                 ))}
               </ProductGrid>
-            </Stack>
+            )}
           </Stack>
-        </>
-      )
-    }
+        </Stack>
+      </>
+    )
   }
 }
 
