@@ -100,24 +100,26 @@ const AppointmentCreateView: React.FC = () => {
             }
           />
           <Divider />
-          <Headline size="four">1. Cryocenter auswählen</Headline>
           {isLocationsLoading ? (
             <Loading />
           ) : (
-            <Fade in={!isLocationsLoading}>
-              <RadioCardGroup defaultValue="one" spacing="2" onChange={e => getAvailableDates(e)}>
-                {locations.map(location => (
-                  <RadioCard key={location.id} value={location.id.toString()}>
-                    <Body noMargin variant="highlight">
-                      {location.name}
-                    </Body>
-                    <Body noMargin color="gray.600">
-                      {location.location}
-                    </Body>
-                  </RadioCard>
-                ))}
-              </RadioCardGroup>
-            </Fade>
+            <>
+              <Fade in={!isLocationsLoading}>
+                <Headline size="four">1. Cryocenter auswählen</Headline>
+                <RadioCardGroup defaultValue="one" spacing="2" onChange={e => getAvailableDates(e)}>
+                  {locations.map(location => (
+                    <RadioCard key={location.id} value={location.id.toString()}>
+                      <Body noMargin variant="highlight">
+                        {location.name}
+                      </Body>
+                      <Body noMargin color="gray.600">
+                        {location.location}
+                      </Body>
+                    </RadioCard>
+                  ))}
+                </RadioCardGroup>
+              </Fade>
+            </>
           )}
         </Stack>
         <Fade in={selectedLocation}>

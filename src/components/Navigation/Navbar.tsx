@@ -23,6 +23,7 @@ import {
   useDisclosure,
   Center,
   Tooltip,
+  Divider,
 } from '@healform/liquid'
 import * as React from 'react'
 import {
@@ -64,7 +65,7 @@ export const Navbar = () => {
                   size={'md'}
                   as={NavLink}
                   to={'/'}
-                  leftIcon={<FiHome />}
+                  /* leftIcon={<FiHome />} */
                   _activeLink={{ color: 'primary.500' }}
                   color={'currentColor'}
                   transitionDuration={'0ms'}
@@ -75,7 +76,7 @@ export const Navbar = () => {
                   size={'md'}
                   as={NavLink}
                   to={'/neuer-termin'}
-                  leftIcon={<FiPlus />}
+                  /* leftIcon={<FiPlus />} */
                   _activeLink={{ color: 'primary.500' }}
                   color={'currentColor'}
                   transitionDuration={'0ms'}
@@ -86,13 +87,16 @@ export const Navbar = () => {
                   size={'md'}
                   as={NavLink}
                   to={'/abonnements'}
-                  leftIcon={<FiAward />}
+                  /* leftIcon={<FiAward />} */
                   _activeLink={{ color: 'primary.500' }}
                   color={'currentColor'}
                   transitionDuration={'0ms'}
                 >
                   Abos
                 </Button>
+                <Center height="20px">
+                  <Divider orientation="vertical" />
+                </Center>
                 <Button
                   size={'md'}
                   as={NavLink}

@@ -1,5 +1,5 @@
 import { withAuthenticationRequired } from '@auth0/auth0-react'
-import { Stack, Divider, HStack, useToast } from '@healform/liquid'
+import { Stack, Divider, useToast } from '@healform/liquid'
 import React, { useEffect, useState } from 'react'
 
 import Error from '../components/Error'

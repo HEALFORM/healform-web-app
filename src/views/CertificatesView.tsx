@@ -1,11 +1,10 @@
 import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react'
 import { IconButton } from '@chakra-ui/react'
-import { Stack, Divider, HStack, useToast, Tooltip } from '@healform/liquid'
+import { Stack, Divider, HStack, useToast, Tooltip, Fade } from '@healform/liquid'
 import React, { useEffect, useState } from 'react'
 import { FiRefreshCw, FiShoppingCart } from 'react-icons/fi'
 
 import CertificateList from '../components/CertificateList'
-import Error from '../components/Error'
 import Loading from '../components/Loading'
 import { PageHeader } from '../components/PageHeader'
 import { Certificate } from '../interfaces/Certificate'
@@ -97,7 +96,13 @@ const CertificatesView: React.FC = () => {
             </HStack>
           </Stack>
           <Divider />
-          {isLoading ? <Loading /> : <CertificateList certificates={certificates} products={products} />}
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <Fade in={!isLoading}>
+              <CertificateList certificates={certificates} products={products} />
+            </Fade>
+          )}
         </Stack>
       </Stack>
     </>
