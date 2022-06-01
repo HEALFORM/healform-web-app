@@ -111,7 +111,7 @@ export const Navbar = () => {
                 <Avatar size="sm" name={user?.name} src={user?.picture} as={MenuButton} />
                 <MenuList borderWidth={0} boxShadow="md" borderRadius="sm" py={2} px={2}>
                   <MenuItem borderRadius="sm" px={2}>
-                    <Avatar size="sm" name={user?.name} src={user?.picture} boxSize="1.2rem" mr={2} />
+                    <Avatar size="sm" name={user?.name} src={user?.picture} boxSize="1.2rem" mr={'.8rem'} />
                     <Body size="two" fontFamily="heading" noMargin>
                       {user?.name}
                     </Body>
