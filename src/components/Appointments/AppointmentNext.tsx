@@ -19,9 +19,7 @@ const AppointmentNext = (props: { nextAppointment: any }) => {
   return (
     <>
       <Stack spacing={2}>
-        <Headline size="four" noMargin>
-          Dein nächster Termin:
-        </Headline>
+        <Body noMargin>Dein nächster Termin:</Body>
         <HStack>
           <Icon as={FiClock} />
           <Body>
