@@ -109,7 +109,7 @@ export const Navbar = () => {
             <HStack spacing="2">
               <Menu>
                 <Avatar size="sm" name={user?.name} src={user?.picture} as={MenuButton} />
-                <MenuList borderWidth={0} boxShadow="md" borderRadius="sm" py={2} px={2}>
+                <MenuList borderWidth={0} boxShadow="md" borderRadius="sm" py={2} px={2} minW="auto">
                   <MenuItem borderRadius="sm" px={2}>
                     <Avatar size="sm" name={user?.name} src={user?.picture} boxSize="1.2rem" mr={'.8rem'} />
                     <Body size="two" fontFamily="heading" noMargin>
