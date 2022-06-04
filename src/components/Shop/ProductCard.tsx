@@ -13,9 +13,7 @@ import {
 import * as React from 'react'
 
 import { Product } from '../../interfaces/Product'
-import { FavouriteButton } from './FavouriteButton'
 import { PriceTag } from './PriceTag'
-import { Rating } from './Rating'
 
 interface Props {
   product: Product
@@ -28,7 +26,7 @@ export const ProductCard = (props: Props) => {
   return (
     <>
       {!product.hidden && (
-        <Stack spacing={useBreakpointValue({ base: '4', md: '5' })} {...rootProps}>
+        <Stack spacing={3} {...rootProps}>
           <Box position="relative">
             <AspectRatio ratio={16 / 9}>
               <Image
@@ -39,7 +37,6 @@ export const ProductCard = (props: Props) => {
                 borderRadius={useBreakpointValue({ base: 'md', md: 'lg' })}
               />
             </AspectRatio>
-            <FavouriteButton position="absolute" top="4" right="4" aria-label={`Add ${name} to your favourites`} />
           </Box>
           <Stack>
             <Stack spacing="1">
@@ -50,7 +47,7 @@ export const ProductCard = (props: Props) => {
             </Stack>
           </Stack>
           <Stack align="center">
-            <Button colorScheme="primary" isFullWidth>
+            <Button colorScheme="primary" isFullWidth size="sm" variant="outline">
               In den Einkaufswagen
             </Button>
           </Stack>
