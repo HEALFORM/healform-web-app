@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { withAuthenticationRequired } from '@auth0/auth0-react'
 import {
   Stack,
@@ -10,14 +11,13 @@ import {
   Button,
   Wrap,
   Divider,
-  WrapItem,
   BodyLarge,
   HStack,
   IconButton,
   Center,
 } from '@healform/liquid'
 import { format } from 'date-fns'
-import { de, deAT } from 'date-fns/locale'
+import { de } from 'date-fns/locale'
 import { Props, useDayzed } from 'dayzed'
 import React, { useEffect, useState } from 'react'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
@@ -28,64 +28,42 @@ import { RadioCard, RadioCardGroup } from '../components/RadioCardGroup'
 import { Location } from '../interfaces/Location'
 
 const AppointmentCreateView: React.FC = () => {
+  /* Available & selected location */
+  const [availableLocations, setAvailableLocations] = useState<Location[]>([])
   const [selectedLocation, setSelectedLocation] = useState<any>()
-  const [locations, setLocations] = useState<Location[]>([])
-  const [times, setTimes] = useState<any[]>([])
+  /* Available dates & selected date */
+  const [availableDates, setAvailableDates] = useState<any[]>([])
+  const [selectedDate, setSelectedDate] = useState<any>(Date.now())
+  /* Available timeslots & selected timeslot */
+  const [availableTimeslots, setAvailableTimeslots] = useState<any[]>([])
+  const [selectedTimeslot, setSelectedTimeslot] = useState<any>()
+  /* Component states */
   const [isLocationsLoading, setLocationsLoading] = useState(true)
   const [isTimeslotsLoading, setTimeslotsLoading] = useState(false)
   const [isError, setError] = useState(false)
-  const [date, setDate] = useState(Date.now())
-  const [selectedDate, setSelectedDate] = useState(Date.now())
   const toast = useToast()
 
   useEffect(() => {
-    const getLocations = () => {
-      fetch(`${process.env.REACT_APP_API_URL}` + `/acuity/locations`)
-        .then(response => response.json())
-        .then(json => {
-          setLocations(json)
-          setLocationsLoading(false)
-        })
-        .catch(err => {
-          if (err.response) {
-            setLocationsLoading(false)
-            setError(true)
-            const id = 'errorResponse'
-            if (!toast.isActive(id)) {
-              toast({
-                title: 'Die Daten konnten nicht geladen werden.',
-                description: 'Der Server gab eine Fehlermeldung zurück.',
-                status: 'error',
-                isClosable: true,
-                position: 'bottom-right',
-                id,
-              })
-            }
-          } else if (err.request) {
-            setLocationsLoading(false)
-            setError(true)
-            const id = 'errorRequest'
-            if (!toast.isActive(id)) {
-              toast({
-                title: 'Die Daten konnten nicht geladen werden.',
-                description: 'Möglicherweise besteht keine Verbinung zum Internet oder Server.',
-                status: 'error',
-                isClosable: true,
-                position: 'bottom-right',
-                id,
-              })
-            }
-          }
-        })
-    }
-
-    getLocations()
+    getAvailableLocations()
   }, [toast])
 
-  const getAvailableTimes = (locationId: string, date: Date) => {
+  const getAvailableLocations = () => {
+    fetch(`${process.env.REACT_APP_API_URL}` + `/acuity/locations`)
+      .then(response => response.json())
+      .then(json => {
+        setAvailableLocations(json)
+        setLocationsLoading(false)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+  const getAvailableTimeslots = (locationId: string, date?: number | Date) => {
     setTimeslotsLoading(true)
     const appointmentId = '5780353'
-    const appointmentDate = format(date, 'yyyy-MM-dd')
+    const appointmentDate = formatDate(date)
+    const appointmentLocation = locationId
     fetch(
       `${process.env.REACT_APP_API_URL}` +
         `/acuity/availability/times/` +
@@ -93,23 +71,27 @@ const AppointmentCreateView: React.FC = () => {
         `/` +
         appointmentDate +
         `/` +
-        locationId,
+        appointmentLocation,
     )
       .then(response => response.json())
       .then(json => {
-        setTimes(json)
+        setAvailableTimeslots(json)
         setTimeslotsLoading(false)
       })
   }
 
-  const _handleOnLocationSelected = ({ location }) => {
-    setSelectedLocation(location)
-    getAvailableTimes(location, selectedDate)
+  const formatDate = (date: number | Date) => {
+    return format(date, 'yyyy-MM-dd')
+  }
+
+  const _handleOnLocationSelected = (selectedLocation: string) => {
+    setSelectedLocation(selectedLocation)
+    getAvailableTimeslots(selectedLocation, selectedDate)
   }
 
   const _handleOnDateSelected = ({ date }) => {
     setSelectedDate(date)
-    getAvailableTimes(selectedLocation, date)
+    getAvailableTimeslots(selectedLocation, date)
   }
 
   return (
@@ -128,9 +110,15 @@ const AppointmentCreateView: React.FC = () => {
           ) : (
             <>
               <Fade in={!isLocationsLoading}>
-                <Headline size="four">1. Cryocenter auswählen</Headline>
-                <RadioCardGroup defaultValue="one" spacing="2" onChange={e => _handleOnLocationSelected(e)}>
-                  {locations.map(location => (
+                <Headline size="four" as="h2">
+                  1. Cryocenter auswählen
+                </Headline>
+                <RadioCardGroup
+                  defaultValue="one"
+                  spacing="2"
+                  onChange={location => _handleOnLocationSelected(location)}
+                >
+                  {availableLocations.map(location => (
                     <RadioCard key={location.id} value={location.id.toString()}>
                       <Body noMargin variant="highlight">
                         {location.name}
@@ -149,53 +137,51 @@ const AppointmentCreateView: React.FC = () => {
           {selectedLocation && (
             <Stack spacing="3">
               <Headline noMargin size="four">
-                2. Datum auswählen.
+                2. Datum auswählen
               </Headline>
-              <Wrap justify="space-between">
-                <WrapItem maxW="50%">
+              <HStack justify="flex-start" flexDirection="row" spacing="4" alignItems="start">
+                <Box maxW="50%">
                   <Datepicker
                     selected={selectedDate}
                     onDateSelected={_handleOnDateSelected}
                     firstDayOfWeek={1}
                     minDate={new Date(new Date().setDate(new Date().getDate() - 1))}
                   />
-                </WrapItem>
-                <WrapItem>
+                </Box>
+                <Box maxW="50%">
+                  <BodyLarge variant="highlight">{format(selectedDate, 'EEEE, dd. LLLL', { locale: de })}</BodyLarge>
                   {isTimeslotsLoading ? (
                     <Center>
                       <Loading />
                     </Center>
                   ) : (
-                    <Wrap justify="space-between">
-                      {times && times.length > 0 ? (
-                        times.map(time => (
+                    <Wrap spacing={2}>
+                      {availableTimeslots && availableTimeslots.length > 0 ? (
+                        availableTimeslots.map(timeslot => (
                           <>
-                            <Stack textAlign="center" spacing={4} flex="auto">
-                              <Stack spacing={0}>
-                                <Box
-                                  px={3}
-                                  py={1}
-                                  borderRadius="sm"
-                                  borderWidth="1px"
-                                  borderColor={useColorModeValue('gray.200', 'gray.800')}
-                                  transition="all .2s"
-                                  _hover={{ borderColor: 'gray.300', cursor: 'pointer' }}
-                                >
-                                  <Body noMargin variant="highlight">
-                                    {format(new Date(time.time), 'HH:mm', { locale: deAT })}
-                                  </Body>
-                                </Box>
-                              </Stack>
-                            </Stack>
+                            <Box
+                              px={3}
+                              py={1}
+                              borderRadius="sm"
+                              borderWidth="1px"
+                              borderColor={useColorModeValue('gray.200', 'gray.800')}
+                              transition="all .2s"
+                              _hover={{ borderColor: 'gray.300', cursor: 'pointer' }}
+                              textAlign="center"
+                            >
+                              <Body noMargin variant="highlight">
+                                {format(new Date(timeslot.time), 'HH:mm', { locale: de })}
+                              </Body>
+                            </Box>
                           </>
                         ))
                       ) : (
-                        <Body>Bitte Ort auswählen</Body>
+                        <Body>Für diesen Tag sind keine Termine verfügbar.</Body>
                       )}
                     </Wrap>
                   )}
-                </WrapItem>
-              </Wrap>
+                </Box>
+              </HStack>
             </Stack>
           )}
         </Fade>
@@ -244,7 +230,7 @@ function Calendar({ calendars, getBackProps, getForwardProps, getDateProps }) {
                 <HStack>
                   <IconButton
                     aria-label="Vorheriger Monat"
-                    size="sm"
+                    size="xs"
                     icon={<FiChevronLeft />}
                     transitionDuration={'0ms'}
                     {...getBackProps({
@@ -254,7 +240,7 @@ function Calendar({ calendars, getBackProps, getForwardProps, getDateProps }) {
                   />
                   <IconButton
                     aria-label="Nächster Monat"
-                    size="sm"
+                    size="xs"
                     icon={<FiChevronRight />}
                     transitionDuration={'0ms'}
                     {...getForwardProps({
@@ -299,7 +285,7 @@ function Calendar({ calendars, getBackProps, getForwardProps, getDateProps }) {
                         <Button
                           size="sm"
                           transitionDuration={0}
-                          variant="outline"
+                          variant="ghost"
                           style={{
                             display: 'inline-block',
                             width: 'calc(100% / 7)',
