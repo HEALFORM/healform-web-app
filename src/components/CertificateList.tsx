@@ -32,7 +32,8 @@ const CertificateList = (props: { certificates: Certificate[]; products: Product
           <Stack key={certificate.id} justify="space-between" direction="row" spacing="4" px={3} align="center">
             <Stack spacing="0">
               <Body noMargin size="two">
-                Zertifikat
+                {certificate.remainingCounts[certificate.appointmentTypeIDs[0]]} Termine von{' '}
+                {products.map(product => product.appointmentTypeCounts[certificate.appointmentTypeIDs[0]])} verfügbar
               </Body>
               <BodyLarge noMargin variant="highlight">
                 {certificate.name}
