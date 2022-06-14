@@ -164,7 +164,7 @@ const AppointmentCreateView: React.FC = () => {
           borderRadius="sm"
           borderWidth="1px"
           borderColor={state.isChecked ? 'primary.500' : useColorModeValue('gray.200', 'gray.800')}
-          _hover={{ borderColor: state.isChecked ? 'primary.500' : 'gray.500', cursor: 'pointer' }}
+          _hover={{ borderColor: state.isChecked ? 'primary.500' : 'gray.400', cursor: 'pointer' }}
           textAlign="center"
           {...getCheckboxProps()}
         >

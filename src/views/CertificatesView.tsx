@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { FiRefreshCw, FiShoppingCart } from 'react-icons/fi'
 
 import CertificateList from '../components/CertificateList'
+import Error from '../components/Error'
 import Loading from '../components/Loading'
 import { PageHeader } from '../components/PageHeader'
 import { Certificate } from '../interfaces/Certificate'
@@ -63,6 +64,20 @@ const CertificatesView: React.FC = () => {
                 id,
               })
             }
+          } else {
+            setLoading(false)
+            setError(true)
+            const id = 'errorUnknown'
+            if (!toast.isActive(id)) {
+              toast({
+                title: 'Ein unbekannter Fehler ist aufgetreten.',
+                description: 'Möglicherweise besteht keine Verbinung zum Internet oder Server.',
+                status: 'error',
+                isClosable: true,
+                position: 'bottom-right',
+                id,
+              })
+            }
           }
         })
     }
@@ -70,43 +85,47 @@ const CertificatesView: React.FC = () => {
     getCertificatesByUser(user?.email)
   }, [toast, user?.email])
 
-  return (
-    <>
-      <Stack spacing={6}>
-        <Stack spacing="3">
-          <Stack
-            spacing="6"
-            direction={{ base: 'column', md: 'row' }}
-            justify="space-between"
-            align={{ base: 'start', md: 'center' }}
-          >
-            <PageHeader
-              title={'Abonnements'}
-              subtitle={
-                'Hier erhältst du einen Überblick über deine erworbenen und aktiven HEALFORM® 10er-, 50er- oder 100er-Karten und deren Restguthaben.'
-              }
-            />
-            <HStack spacing="2">
-              <Tooltip label={'Aktualisieren'} hasArrow>
-                <IconButton icon={<FiRefreshCw />} aria-label="Aktualisieren" size="sm" />
-              </Tooltip>
-              <Tooltip label={'Zum Shop'} hasArrow>
-                <IconButton icon={<FiShoppingCart />} aria-label="Neues Abonnement bestellen" size="sm" />
-              </Tooltip>
-            </HStack>
+  if (isError) {
+    return <Error />
+  } else {
+    return (
+      <>
+        <Stack spacing={6}>
+          <Stack spacing="3">
+            <Stack
+              spacing="6"
+              direction={{ base: 'column', md: 'row' }}
+              justify="space-between"
+              align={{ base: 'start', md: 'center' }}
+            >
+              <PageHeader
+                title={'Abonnements'}
+                subtitle={
+                  'Hier erhältst du einen Überblick über deine erworbenen und aktiven HEALFORM® 10er-, 50er- oder 100er-Karten und deren Restguthaben.'
+                }
+              />
+              <HStack spacing="2">
+                <Tooltip label={'Aktualisieren'} hasArrow>
+                  <IconButton icon={<FiRefreshCw />} aria-label="Aktualisieren" size="sm" />
+                </Tooltip>
+                <Tooltip label={'Zum Shop'} hasArrow>
+                  <IconButton icon={<FiShoppingCart />} aria-label="Neues Abonnement bestellen" size="sm" />
+                </Tooltip>
+              </HStack>
+            </Stack>
+            <Divider />
+            {isLoading ? (
+              <Loading />
+            ) : (
+              <Fade in={!isLoading}>
+                <CertificateList certificates={certificates} products={products} />
+              </Fade>
+            )}
           </Stack>
-          <Divider />
-          {isLoading ? (
-            <Loading />
-          ) : (
-            <Fade in={!isLoading}>
-              <CertificateList certificates={certificates} products={products} />
-            </Fade>
-          )}
         </Stack>
-      </Stack>
-    </>
-  )
+      </>
+    )
+  }
 }
 
 export default withAuthenticationRequired(CertificatesView, {

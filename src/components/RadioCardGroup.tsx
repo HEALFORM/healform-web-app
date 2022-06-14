@@ -77,7 +77,7 @@ export const RadioCard = (props: RadioCardProps) => {
       borderColor={state.isChecked ? 'primary.500' : useColorModeValue('gray.200', 'gray.800')}
       borderRadius="sm"
       p={3}
-      _hover={{ borderColor: state.isChecked ? 'primary.500' : 'gray.500', cursor: 'pointer' }}
+      _hover={{ borderColor: state.isChecked ? 'primary.500' : 'gray.400', cursor: 'pointer' }}
     >
       <input {...inputProps} aria-labelledby={id} />
       <Box sx={styles} {...checkboxProps} {...rest}>

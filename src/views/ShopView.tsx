@@ -54,6 +54,20 @@ const ShopView: React.FC = () => {
                 id,
               })
             }
+          } else {
+            setLoading(false)
+            setError(true)
+            const id = 'errorUnknown'
+            if (!toast.isActive(id)) {
+              toast({
+                title: 'Ein unbekannter Fehler ist aufgetreten.',
+                description: 'Möglicherweise besteht keine Verbinung zum Internet oder Server.',
+                status: 'error',
+                isClosable: true,
+                position: 'bottom-right',
+                id,
+              })
+            }
           }
         })
     }
