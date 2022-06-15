@@ -1,17 +1,17 @@
 import { withAuthenticationRequired } from '@auth0/auth0-react'
 import { chakra, useRadio, useRadioGroup } from '@chakra-ui/react'
 import {
-  Stack,
   Body,
-  useToast,
-  Box,
-  Headline,
-  Fade,
-  useColorModeValue,
-  Wrap,
-  Divider,
   BodyLarge,
+  Box,
+  Divider,
+  Fade,
+  Headline,
   HStack,
+  Stack,
+  useColorModeValue,
+  useToast,
+  Wrap,
 } from '@healform/liquid'
 import { format } from 'date-fns'
 import { de } from 'date-fns/locale'
@@ -147,8 +147,9 @@ const AppointmentCreateView: React.FC = () => {
   })
 
   function getLocationName(id: number) {
-    const result = _.find(availableLocations, ['id', id])
-    console.log(result)
+    console.log(id)
+    console.log(availableLocations)
+    return _.find(availableLocations, { id: id })
   }
 
   function Timeslot(props: { timeslot: string }) {
@@ -265,8 +266,8 @@ const AppointmentCreateView: React.FC = () => {
                 <Headline noMargin size="four" as="h3">
                   3. Termin bestätigen
                 </Headline>
-                <Body>Cryocenter: {selectedLocationName}</Body>
-                <Body>Uhrzeit: {selectedTimeslot}</Body>
+                <Body>Cryocenter: {selectedLocation}</Body>
+                <Body>Uhrzeit: {format(selectedTimeslot, 'EEEE, dd. LLLL HH:mm', { locale: de })}</Body>
               </Stack>
             )}
           </Fade>
